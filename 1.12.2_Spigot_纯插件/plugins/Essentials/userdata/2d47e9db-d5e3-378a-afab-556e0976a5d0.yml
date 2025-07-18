@@ -1,0 +1,19 @@
+lastAccountName: domode
+timestamps:
+  login: 1752812951618
+  logout: 1752812954289
+ipAddress: 192.168.200.172
+lastlocation:
+  world: world
+  x: 240.5
+  y: 69.0
+  z: -135.5
+  yaw: 0.0
+  pitch: 0.0
+logoutlocation:
+  world: world
+  x: -117.5
+  y: 67.0
+  z: 256.5
+  yaw: -0.15198317
+  pitch: 0.6079326

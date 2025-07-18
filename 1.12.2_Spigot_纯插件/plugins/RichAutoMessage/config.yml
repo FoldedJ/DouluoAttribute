@@ -1,0 +1,8 @@
+normal:
+  prefix: '&4[RichAutoMessage]'
+  suffix: ''
+  interval: 120
+  random: false
+pro:
+  startuptime: 20
+  starttime: 2
