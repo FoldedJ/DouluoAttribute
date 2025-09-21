@@ -12,14 +12,8 @@ function onLoad(attr) {
 }
 
 function runAttack(Attr, attacker, entity, handle) {
-    // 获取自己的吸血几率
-    var vam_rate = Attr.getRandomValue(attacker, "吸血几率", handle);
-    // 获取对方的吸血躲避
-    var vam_dodge = Attr.getRandomValue(entity, "吸血躲避", handle);
     // 计算吸血几率
-    var vam_rate_final = ((vam_rate - vam_dodge) > 0) ? (vam_rate - vam_dodge) : 0;
-    // 计算吸血几率是否触发
-    var chance = Attr.chance(vam_rate_final);
+    var chance = Attr.chance(Attr.getRandomValue(attacker, "吸血几率", handle) - Attr.getRandomValue(entity, "吸血躲避", handle));
 	if(chance) {
 		// 获取自己的最大生命值
         var max_health = attacker.getMaxHealth();

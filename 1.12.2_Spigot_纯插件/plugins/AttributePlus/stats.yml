@@ -3,7 +3,7 @@
 options: "GUI"
 
 gui:
-  title: "&1&l&n玩家属性"
+  title: "玩家属性"
   #选择界面大小 (必须为 9 的倍数,最高 54)
   size: 27
   #可以自由创建新的位置,但节点名不可以相同
@@ -17,93 +17,159 @@ gui:
     info:
       type: NETHER_STAR
       slot: 4
-      name: "&6&l个人战力"
+      name: "&6个人战力"
       lore:
-        - "&6属性战力: &c%ap_combatpower%"
+        - " "
+        - "&r属性战力: &c%ap_combatpower%"
     attack:
       type: IRON_SWORD
-      slot: 11
-      name: "&6攻击属性"
+      slot: 10
+      name: "&6攻击类属性"
       lore:
         - " "
-        - "&a物理伤害: &f%ap_attack%"
-        - "&aPVP伤害: &f%ap_pvp_attack%"
-        - "&aPVE伤害: &f%ap_pve_attack%"
-        - "&6真实伤害: &f%ap_real_attack%"
-        - "&6燃烧几率: &f%ap_fire:max%&8&l%"
-        - "&6燃烧伤害: &f%ap_fire_damage%"
-        - "&8真伤: &8%ap_trueDamage:max%"
-        - "&3真防: &8%ap_trueDefense:max%"
-        - "&8雷电几率: &8%ap_lightningRate:max%&8&l%"
-        - "&3雷电伤害: &8%ap_lightningDamage:max%"
-        - "&3雷电防御: &8%ap_lightningDefense:max%"
-        - "&3毒素伤害: &8%ap_poisonDamage:max%"
-        - "&3毒素几率: &8%ap_poisonRate:max%"
-        - "&3毒素防御: &8%ap_poisonDefense:max%"
-        - "&3毒素伤害段: &8%ap_poisonTickDamage:max%"
-        - "&3神圣几率: &8%ap_holyRate:max%"
-        - "&3神圣伤害: &8%ap_holyDamage:max%"
-        - "&3神圣防御: &8%ap_holyDefense:max%"
-        - "&3处决几率: &8%ap_executionRate:max%"
-        - "&3处决伤害: &8%ap_executionDamage:max%"
-        - "&3处决防御: &8%ap_executionDefense:max%"
-        - "&3斩杀几率: &8%ap_killRate:max%"
-        - "&3斩杀百分比: &8%ap_killPercent:max%&l%"
-        - "&3雷电伤害加成: &8%ap_lightningDamageBonus:max&l%"
+        - "&r物理伤害: &a%ap_attack:max%"
         - " "
-        - "&c暴击几率: &f%ap_crit:max%&8&l%"
-        - "&c暴击倍率: &f%ap_crit_rate:max%&8&l%"
-        - "&c吸血几率: &f%ap_vampire:max%&8&l%"
-        - "&c吸血倍率: &f%ap_vampire_rate:max%&8&l%"
-        - "&8溟灭几率: &8%ap_yanmie:max%&8&l%"
-        - "&3溟灭伤害: &8%ap_yanmieDamage:max%"
+        - "&r暴击几率: &a%ap_critchance:max%%"
         - " "
-        - "&3命中几率: &f%ap_hit:max%&8&l%"
-        - "&3冰冻几率: &f%ap_frozen:max%&8&l%"
-        - "&3冰冻强度: &f%ap_frozen_intensity:max%&8&l%"
-        - "&3雷击几率: &f%ap_lightning:max%&8&l%"
-        - "&3雷击伤害: &f%ap_lightning_damage%"
-        - "&3破甲几率: &f%ap_penetrate_chance:max%&8&l%"
-        - "&6护甲穿透: &f%ap_see_through:max%&8&l%"
-        - "&3破盾几率: &f%ap_break_shield:max%&8&l%"
+        - "&r暴击伤害: &a%ap_critdamage_attack:max%%"
+        - " "
+        - "&r吸血几率: &a%ap_vamRate:max%%"
+        - " "
+        - "&r吸血倍率: &a%ap_vamDamage:max%%"
+        - " "
+        - "&r命中几率: &a%ap_hit:max%%"
+        - " "
+        - "&r斗天真伤: &a%ap_trueDamage:max%"
+        - " "
+        - "&r雷霆几率: &a%ap_lightningRate:max%%"
+        - " "
+        - "&r雷霆伤害: &a%ap_lightningDamage:max%"
+        - " "
+        - "&r毒素几率: &a%ap_poisonRate:max%%"
+        - " "
+        - "&r毒素伤害: &a%ap_poisonDamage:max%"
+        - " "
+        - "&r处决几率: &a%ap_executionRate:max%%"
+        - " "
+        - "&r处决伤害: &a%ap_executionDamage:max%"
+        - " "
+        - "&r神圣几率: &a%ap_holyRate:max%%"
+        - " "
+        - "&r神圣伤害: &a%ap_holyDamage:max%"
+
     defense:
       type: IRON_CHESTPLATE
-      slot: 13
-      name: "&3防御属性"
+      slot: 12
+      name: "&6防御类属性"
       lore:
         - " "
-        - "&a护甲值: &f%ap_armor:max%&8&l%"
-        - "&a物理防御: &f%ap_defense%"
-        - "&aPVE防御: &f%ap_pvp_defense%"
-        - "&aPVE防御: &f%ap_pve_defense%"
+        - "&r生命上限: &a%ap_health:max%"
         - " "
-        - "&c暴击抗性: &f%ap_crit_resist:max%&8&l%"
-        - "&c吸血抗性: &f%ap_vampire_resist:max%&8&l%"
+        - "&r防御力: &a%ap_defense:max%"
         - " "
-        - "&6反弹几率: &f%ap_reflection:max%&8&l%"
-        - "&6反弹伤害: &f%ap_reflection_rate:max%&8&l%"
-        - "&6闪避几率: &f%ap_dodge:max%&8&l%"
-        - "&6盾牌格挡率: &f%ap_shield_block:max%&8&l%"
-        - "&6箭伤免疫率: &f%ap_remote_immune:max%&8&l%"
+        - "&r暴击躲避: &a%ap_critchance_defense:max%%"
+        - " "
+        - "&r暴击抵抗: &a%ap_critdamage_defense:max%%"
+        - " "
+        - "&r吸血躲避: &a%ap_vamDodge:max%%"
+        - " "
+        - "&r吸血抵抗: &a%ap_vamResist:max%%"
+        - " "
+        - "&r闪避几率: &a%ap_dodge:max%%"
+        - " "
+        - "&r斗天真防: &a%ap_trueDefense:max%"
+        - " "
+        - "&r雷霆防御: &a%ap_lightningDefense:max%"
+        - " "
+        - "&r毒素防御: &a%ap_poisonDefense:max%"
+        - " "
+        - "&r处决防御: &a%ap_executionDefense:max%"
+        - " "
+        - "&r神圣防御: &a%ap_holyDefense:max%"
+
     other:
       type: BOOK
-      slot: 15
-      name: "&7其他属性"
+      slot: 14
+      name: "&6其他属性"
       lore:
         - " "
-        - "&a生命力: &f%ap_health:max%&8&l%"
-        - "&a生命恢复: &f%ap_restore%"
-        - "&a百分比恢复: &f%ap_restore_ratio:max%&8&l%"
+        - "&r移动速度: &a%ap_moving:max%"
         - " "
-        - "&6蓄力加成: &f%ap_accumulate_addition:max%&8&l%"
-        - "&6蓄力干扰: &f%ap_accumulate_disturb:max%&8&l%"
-        - "&6移速加成: &f%ap_moving:max%&8&l%"
-        - "&6经验加成: &f%ap_exp_addition:max%&8&l%"
-        - "&6召唤强度: &f%ap_summon_intensity:max%&8&l%"
+        - "&r每秒回血: &a%ap_restore:max%"
         - " "
-        - "&3弓箭射速: &f%ap_shoot_speed:max%&8&l%"
-        - "&3箭术精准: &f%ap_shoot_spread:max%&8&l%"
-        - "&3箭术穿透率: &f%ap_shoot_through:max%&8&l%"
+        - "&r经验加成: &a%ap_exp_addition:max%%"
+        - " "
+        - "&r攻击加成: &a%ap_custom_attack_addition:max%%"
+        - " "
+        - "&r防御加成: &a%ap_custom_defense_addition:max%%"
+        - " "
+        - "&r生命加成: &a%ap_custom_health_addition:max%%"
+        - " "
+        - "&r斗天真伤加成: &a%ap_true_attack_addition:max%%"
+        - " "
+        - "&r雷霆伤害加成: &a%ap_lighting_attack_addition:max%%"
+        - " "
+        - "&r毒素伤害加成: &a%ap_poison_attack_addition:max%%"
+        - " "
+        - "&r处决伤害加成: &a%ap_execution_attack_addition:max%%"
+        - " "
+        - "&r神圣伤害加成: &a%ap_holy_attack_addition:max%%"
+
+
+    newbee:
+      type: END_CRYSTAL
+      slot: 16
+      name: "&6特殊属性"
+      lore:
+        - " "
+        - "&r斩杀几率: &a%ap_killRate:max%%"
+        - " "
+        - "&r斩杀百分比: &a%ap_killPercent:max%%"
+        - " "
+        - "&r破甲几率: &a%ap_pojiaRate:max%%"
+        - " "
+        - "&r破甲效果: &a%ap_pojiaEffect:max%%"
+        - " "
+        - "&r魂骨掉率加成: &a%ap_hunguDiaolv:max%%"
+        - " "
+        - "&r魂环掉率加成: &a%ap_hunhuanDiaolv:max%%"
+        - " "
+        - "&r魂灵掉率加成: &a%ap_hunlingDiaolv:max%%"
+        - " "
+        - "&r魂灵经验加成: &a%ap_hunlingxp:max%%"
+        - " "
+        - "&r毒素伤害段: &a%ap_poisonTickDamage:max%%"
+
+    introduction:
+      type: ENCHANTED_BOOK
+      slot: 22
+      name: "&6服务器属性介绍"
+      lore:
+        - " "
+        - "&f&l斗天真伤: &7无视目标&6&l&n防御力&r&7造成&f&l斗天真伤伤害&r&7（享受暴击效果），无冷却时间"
+        - " "
+        - "&9&l雷霆: &7触发后，召唤一条天雷攻击目标，造成&9&l雷霆伤害&r&7（享受暴击效果），冷却时间&l&c&n5&r&7s"
+        - " "
+        - "&2&l毒素: &7触发后，令目标每&l&c&n0.5&r&7s受到一次&2&l毒素伤害&r&7（享受暴击效果），共造成（&l&c&n2&r&7 + &2&l&o毒素伤害段&r&7）次毒素伤害，冷却时间&l&c&n2&r&7s" 
+        - " "
+        - "&2&l毒素伤害段: &7增加&2&l毒素伤害&r&7的次数" 
+        - " "
+        - "&e&l神圣: &7触发后，对目标造成&e&l神圣伤害&r&7（享受暴击效果），削弱对方当前&l&c&n10&r&7%的各种防御&l&c&n10&r&7s，无冷却时间" 
+        - " "
+        - "&4&l处决: &7触发后，对目标造成&4&l处决伤害&r&7（享受暴击效果），追加造成对方当前&l&c&n10&r&7%的血量的&4&l处决伤害&r&7，冷却时间&l&c&n5&r&7s" 
+        - " "
+        - "&6&l斩杀: &7当目标（非玩家）当前血量低于其最大生命值的&6&l&o斩杀百分比&r&7时，造成对方当前剩余生命值的伤害，无冷却时间" 
+        - " "
+        - "&6&l斩杀百分比: &7增加&6&l斩杀&r&7中触发血量的百分比"  
+        - " "
+        - "&8&l破甲: &7触发后，削弱对方当前&8&l&o破甲效果&r&7的各种防御&l&c&n10&r&7s，无冷却时间" 
+        - " "
+        - "&8&l破甲效果: &7增加&8&l破甲&r&7中削弱目标各种防御的百分比"  
+
+
+
+
+
 
 book:
   attack:
@@ -128,7 +194,7 @@ book:
     - "&8破甲几率: &8%ap_sunder_armor:max%&8&l%"
     - "&8护甲穿透: &8%ap_see_through:max%&8&l%"
     - "&8破盾几率: &8%ap_break_shield:max%&8&l%"
-    - "&8溟灭几率: &8%ap_yanmie:max%&8&l%"
+
   defense:
     - "     &3&l&n防御属性"
     - "&a护甲值: &8%ap_armor:max%&8&l%"
@@ -160,4 +226,3 @@ book:
     - "&3弓箭射速: &8%ap_shoot_speed:max%&8&l%"
     - "&3箭术精准: &8%ap_shoot_spread:max%&8&l%"
     - "&3箭术穿透率: &8%ap_shoot_through:max%&8&l%"
-    - "&3溟灭伤害: &8%ap_yanmieDamage:max%&8&l%"

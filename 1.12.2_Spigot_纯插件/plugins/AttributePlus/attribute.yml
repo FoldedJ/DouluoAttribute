@@ -7,40 +7,38 @@ attribute:
     # 攻击与防御类属性
     attackOrDefense:
       attack: 物理伤害
-      real_attack: 真实伤害
-      crit: 暴击几率
+      real_attack: 什么几把
+      crit: 无效暴击几率
       fire: 燃烧几率
       frozen: 冰冻几率
-      lightning: 雷击几率
-      vampire: 吸血几率
+      lightning: 无效雷击几率
+      vampire: 无效吸血几率
       armor: 护甲值
-      defense: 物理防御
+      defense: 防御力
       dodge: 闪避几率
       reflection: 反弹几率
       remote_immune: 箭伤免疫率
       testAttribute: 测试脚本属性
-      yanmie: 溟灭几率
-      trueDamage: 真伤
-      trueDefense: 真防
+      yanmie: 无效溟灭几率
+      trueDamage: 斗天真伤
       executionRate: 处决几率
-      executionDefense: 处决防御
       poisonRate: 毒素几率
-      poisonDefense: 毒素防御
       holyRate: 神圣几率
-      holyDefense: 神圣防御
-      lightningRate: 雷电几率
-      lightningDefense: 雷电防御
+      lightningRate: 雷霆几率
       killRate: 斩杀几率
       vamRate: 吸血几率
+      critchance: 暴击几率
+      damage_reduction: 伤害减免
+      pojiaRate: 破甲几率
     # 更新类属性(即属性刷新时触发)
     update:
-      health: 生命力
+      health: 生命上限
       moving: 移速加成
       restore_ratio: 百分比恢复
-      lighting_attack_addition: 雷电伤害加成
+      lighting_attack_addition: 雷霆伤害加成
       execution_attack_addition: 处决伤害加成
       poison_attack_addition: 毒素伤害加成
-      true_attack_addition: 真伤加成
+      true_attack_addition: 斗天真伤加成
       holy_attack_addition: 神圣伤害加成
     # 运行类属性(即每隔几秒触发一次)
     runtime: {}
@@ -48,10 +46,10 @@ attribute:
     other:
       pve_attack: PVE伤害
       pvp_attack: PVP伤害
-      crit_damage_resist: 暴伤抵抗
-      crit_dodge: 暴击闪避
-      crit_rate: 暴伤倍率
-      crit_resist: 暴击抵抗
+      crit_damage_resist: 无效暴伤抵抗
+      crit_dodge: 无效暴击闪避
+      crit_rate: 无效暴伤倍率
+      crit_resist: 无效暴击抵抗
       fire_damage: 燃烧伤害
       frozen_intensity: 冰冻强度
       lightning_damage: 雷击伤害
@@ -59,7 +57,7 @@ attribute:
       vampire_rate: 吸血倍率
       vampire_resist: 吸血抵抗
       see_through: 护甲穿透
-      sunder_armor: 破甲几率
+      sunder_armor: 无效破甲几率
       pve_defense: PVE防御
       pvp_defense: PVP防御
       hit: 命中几率
@@ -79,13 +77,27 @@ attribute:
       poisonDamage: 毒素伤害
       poisonTickDamage: 毒素伤害段
       holyDamage: 神圣伤害
-      lightningDamage: 雷电伤害
+      lightningDamage: 雷霆伤害
       killPercent: 斩杀百分比
       vamDamage: 吸血倍率
       vamDodge: 吸血躲避
       vamResist: 吸血抵抗
       killDamage: 斩杀伤害
       isholy: 神圣判断
+      critdamage_attack: 暴击伤害
+      critchance_defense: 暴击躲避
+      critdamage_defense: 暴击抵抗
+      trueDefense: 斗天真防
+      lightningDefense: 雷霆防御
+      poisonDefense: 毒素防御
+      executionDefense: 处决防御
+      holyDefense: 神圣防御
+      hunlingDiaolv: 魂灵掉率加成
+      hunlingxp: 魂灵经验加成
+      hunhuanDiaolv: 魂环掉率加成
+      hunguDiaolv: 魂骨掉率加成
+      pojiaEffect: 破甲效果
+      ispojia: 破甲判断
   # 优先级
   priority:
     attackOrDefense:
@@ -115,6 +127,9 @@ attribute:
       lightningDefense: 106
       killRate: 100
       vamRate: 150
+      critchance: 73
+      damage_reduction: 1004
+      pojiaRate: 120
     update:
       health: 100
       moving: 101
@@ -169,6 +184,20 @@ attribute:
       vamResist: -1.0
       killDamage: -1.0
       isholy: -1.0
+      critdamage_attack: -1.0
+      critchance_defense: -1.0
+      critdamage_defense: -1.0
+      trueDefense: -1.0
+      lightningDefense: -1.0
+      poisonDefense: -1.0
+      executionDefense: -1.0
+      holyDefense: -1.0
+      hunlingDiaolv: -1.0
+      hunlingxp: -1.0
+      hunhuanDiaolv: -1.0
+      hunguDiaolv: -1.0
+      pojiaEffect: -1.0
+      ispojia: -1.0
     attackOrDefense:
       real_attack: -1.0
       attack: -1.0
@@ -196,6 +225,9 @@ attribute:
       lightningDefense: -1.0
       killRate: -1.0
       vamRate: -1.0
+      critchance: -1.0
+      damage_reduction: -1.0
+      pojiaRate: -1.0
     update:
       health: -1.0
       moving: -1.0
@@ -234,6 +266,9 @@ attribute:
       lightningDefense: 5.0
       killRate: 50.0
       vamRate: 10.0
+      critchance: 1.0
+      damage_reduction: 100.0
+      pojiaRate: 5.0
     update:
       health: 5.0
       moving: 5.0
@@ -274,7 +309,7 @@ attribute:
       shoot_through: 5.0
       summon_intensity: 10.0
       yanmieDamage: 1.0
-      trueDefense: 0.0
+      trueDefense: 5.0
       executionDamage: 10.0
       poisonDamage: 10.0
       poisonTickDamage: 500.0
@@ -286,6 +321,19 @@ attribute:
       vamResist: 10.0
       killDamage: 100.0
       isholy: 1.0
+      critdamage_attack: 1.0
+      critchance_defense: 1.0
+      critdamage_defense: 1.0
+      lightningDefense: 10.0
+      poisonDefense: 5.0
+      executionDefense: 5.0
+      holyDefense: 5.0
+      hunlingDiaolv: 0.0
+      hunlingxp: 0.0
+      hunhuanDiaolv: 0.0
+      hunguDiaolv: 0.0
+      pojiaEffect: 10.0
+      ispojia: 1.0
   # 属性公式
   # {attackerAttack} 当前 被攻击者 所受伤害(受优先级影响)
   # {entityAttack} 当前 攻击者 所受伤害(受优先级影响)(例如反弹伤害)
@@ -293,11 +341,12 @@ attribute:
   # {entityA:属性名} 取得攻击者的对应属性值
   # {entityB:属性名} 取得被攻击者的对应属性值
   formula:
-    crit: ({entityA:物理伤害}-{entityB:物理防御})*({entityA:暴伤倍率}-{entityB:暴伤抵抗})/100
     fire: '{entityA:燃烧伤害}'
     frozen: ({entityB:移速加成}+50)*{entityA:冰冻强度}/100
     lightning: '{entityA:雷击伤害}'
     moving: '{value}/500'
+    crit: '{attackerAttack}*({entityA:暴伤倍率}-{entityB:暴伤抵抗})/100'
+  # crit: '{attackerAttack}*({entityA:暴伤倍率}-{entityB:暴伤抵抗})/100'
   # 消息
   message:
     # 变量说明
@@ -306,42 +355,42 @@ attribute:
     # {attackerDamage} 此次事件 被攻击者 所受最终伤害
     # {entityDamage} 此次事件 攻击者 所受最终伤害(例如反弹伤害)
     # {属性变量} 此次事件该属性所造成的属性值 (例 {attack})
-    attack:
-    - 对 {entityB} 造成 {attackerDamage} 点伤害,穿透伤害 {see_through}
-    - '{entityA} 对你造成 {attackerDamage} 点伤害'
-    crit:
-    - '&c暴击!&f 对 {entityB} 额外造成 {crit} 点暴击伤害,最终伤害 {attackerDamage}'
-    - '&c暴击!&f {entityA} 对你额外造成 {crit} 点暴击伤害,最终伤害 {attackerDamage}'
-    fire:
-    - '&6&l燃烧! &f额外造成 {fire} 点燃烧伤害!'
-    - '&6&l燃烧! &f对方对你额外造成 {fire} 点燃烧伤害!'
-    frozen:
-    - 你降低了对方 {frozen} 点移动速度,持续 3 秒!
-    - 对方降低了你 {frozen} 点移动速度,持续 3 秒!
-    lightning:
-    - '&1&l雷击! &f额外造成 {lightning} 点雷击伤害!'
-    - '&1&l雷击! &f对方对你额外造成 {lightning} 点雷击伤害!'
-    vampire:
-    - '&c吸血!&f 吸取并对 {entityB} 的 {vampire} 点生命力伤害!'
-    - '&c吸血!&f 你被 {entityA} 吸取并造成 {vampire} 点生命力伤害!'
-    defense:
-    - X
-    - 你抵消了来自 {entityA} 的 {defense} 点伤害,最终于伤害 {attackerDamage}
+    # attack:
+    # - 对 {entityB} 造成 {attackerDamage} 点伤害,穿透伤害 {see_through}
+    # - '{entityA} 对你造成 {attackerDamage} 点伤害'
+    # crit:
+    # - '&c暴击!&f 对 {entityB} 额外造成 {crit} 点暴击伤害,最终伤害 {attackerDamage}'
+    # - '&c暴击!&f {entityA} 对你额外造成 {crit} 点暴击伤害,最终伤害 {attackerDamage}'
+    # fire:
+    # - '&6&l燃烧! &f额外造成 {fire} 点燃烧伤害!'
+    # - '&6&l燃烧! &f对方对你额外造成 {fire} 点燃烧伤害!'
+    # frozen:
+    # - 你降低了对方 {frozen} 点移动速度,持续 3 秒!
+    # - 对方降低了你 {frozen} 点移动速度,持续 3 秒!
+    # lightning:
+    # - '&1&l雷击! &f额外造成 {lightning} 点雷击伤害!'
+    # - '&1&l雷击! &f对方对你额外造成 {lightning} 点雷击伤害!'
+    # vampire:
+    # - '&c吸血!&f 吸取并对 {entityB} 的 {vampire} 点生命力伤害!'
+    # - '&c吸血!&f 你被 {entityA} 吸取并造成 {vampire} 点生命力伤害!'
+    # defense:
+    # - X
+    # - 你抵消了来自 {entityA} 的 {defense} 点伤害,最终于伤害 {attackerDamage}
     dodge:
-    - '{entityB} 闪避了你的攻击'
-    - 你避开了 {entityA} 的攻击
-    reflection:
-    - 对方反弹了 {reflection} 点伤害给你.
-    - 你反弹了 {reflection} 点伤害给对方!
-    remote_immune:
-    - 对方免疫了你此次远程伤害!
-    - 你免疫了对方此处远程伤害!
-    testAttribute:
-    - 测试属性伤害 {testAttribute}
-    - 受到测试属性 {testAttribute}
-    yanmie:
-    - 溟灭! 你对对方造成 {testAttributeDamage} 点溟灭伤害
-    - 溟灭! 对方对你造成 {testAttributeDamage} 点溟灭伤害
+    - '&7[&c系统&7] &b对方闪避了你的攻击'
+    - '&7[&c系统&7] &b你触发了一次闪避'
+  # reflection:
+  # - 对方反弹了 {reflection} 点伤害给你.
+  # - 你反弹了 {reflection} 点伤害给对方!
+  # remote_immune:
+  # - 对方免疫了你此次远程伤害!
+  # - 你免疫了对方此处远程伤害!
+  # testAttribute:
+  # - 测试属性伤害 {testAttribute}
+  # - 受到测试属性 {testAttribute}
+  # yanmie:
+  # - 溟灭! 你对对方造成 {testAttributeDamage} 点溟灭伤害
+  # - 溟灭! 对方对你造成 {testAttributeDamage} 点溟灭伤害
   # 特别提醒:
   # 除 other 类属性外的所有属性点支持在这增加提示消息
   # 节点名格式固定为属性变量名,例如

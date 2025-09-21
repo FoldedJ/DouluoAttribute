@@ -1,0 +1,32 @@
+var priority = 105
+var combatPower = 5.0
+var attributeName = "斗天真伤"
+var attributeType = "ATTACK"
+var placeholder = "trueDamage"
+
+/* 每个属性再注册时都会调用该方法，也可以忽略不写 */
+function onLoad(attr) {
+    Utils.registerOtherAttribute("斗天真防", 5.0, "trueDefense");
+    return attr
+}
+
+function runAttack(Attr, attacker, entity, handle) {
+    // 计算暴击率
+	var crit_chance = Attr.chance(Attr.getRandomValue(attacker, "暴击几率", handle) - Attr.getRandomValue(entity, "暴击躲避", handle));
+    // 计算基础斗天真伤
+    var damage = ((Attr.getRandomValue(attacker, "斗天真伤", handle) - Attr.getRandomValue(entity, "斗天真防", handle)) > 0) ? (Attr.getRandomValue(attacker, "斗天真伤", handle) - Attr.getRandomValue(entity, "斗天真防", handle)) : 0;
+    // 计算最终伤害
+    if (crit_chance) {
+        // 计算暴击伤害
+	    var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击伤害",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage > damage ?
+	    ( 100 + Attr.getRandomValue(attacker,"暴击伤害",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage : damage;
+        Attr.addDamage(attacker, crit_damage_value.toFixed(0), handle);
+        attacker.sendMessage("§7[§c系统§7] §b你触发了一次§f§l斗天真伤§c§l暴击§r§b,伤害为§e§l" + crit_damage_value.toFixed(0));
+        entity.sendMessage("§7[§c系统§7] §b你受到了一次§f§l斗天真伤§c§l暴击§r§b,伤害为§e§l" + crit_damage_value.toFixed(0));
+    } else {
+        Attr.addDamage(attacker, damage.toFixed(0), handle);
+        attacker.sendMessage("§7[§c系统§7] §b你触发了一次§f§l斗天真伤§r§b,伤害为§e§l" + damage.toFixed(0));
+        entity.sendMessage("§7[§c系统§7] §b你受到了一次§f§l斗天真伤§r§b,伤害为§e§l" + damage.toFixed(0));
+    }
+    return (damage > 0);
+}

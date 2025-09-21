@@ -21,13 +21,12 @@ function runAttack(Attr, attacker, entity, handle) {
         var kill_percent = Attr.getRandomValue(attacker, "斩杀百分比", handle);
         if (health <= (max_health * kill_percent) / 100) {
             // 计算斩杀的几率
-            var rate = Attr.getRandomValue(attacker, "斩杀几率", handle);
-            var chance = Attr.chance(rate);
+            var chance = Attr.chance(Attr.getRandomValue(attacker, "斩杀几率", handle));
             if (chance) {
                 // 计算斩杀伤害
                 var kill_damage = health;
                 AttributeAPI.attackTo(entity, attacker, kill_damage.toFixed(0));
-                attacker.sendMessage("§7[§c系统§7] §b你触发了一次§6§l斩杀§r§b,伤害为 §e§l" + kill_damage.toFixed(0));
+                attacker.sendMessage("§7[§c系统§7] §b你触发了一次§6§l斩杀");
             }
         }
     }
