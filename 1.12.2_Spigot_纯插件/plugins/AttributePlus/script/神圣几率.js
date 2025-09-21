@@ -39,14 +39,14 @@ function runAttack(Attr, attacker, entity, handle) {
             // 计算削弱值
             var defense_value = Attr.getRandomValue(entity, "防御力", handle) * 0.1
             var true_defense_value = Attr.getRandomValue(entity, "斗天真防", handle) * 0.1
-            var lightning_defense_value = Attr.getRandomValue(entity, "雷电防御", handle) * 0.1
+            var lightning_defense_value = Attr.getRandomValue(entity, "雷霆防御", handle) * 0.1
             var poison_defense_value = Attr.getRandomValue(entity, "毒素防御", handle) * 0.1
             var execution_defense_value = Attr.getRandomValue(entity, "处决防御", handle) * 0.1
             var holy_defense_value = Attr.getRandomValue(entity, "神圣防御", handle) * 0.1
             // 添加削弱效果
             AttributeAPI.addSourceAttribute(data, "神圣效果", Arrays.asList("防御力: -" + defense_value.toFixed(0), 
                                                                             "斗天真防: -" + true_defense_value.toFixed(0),
-                                                                            "雷电防御: -" + lightning_defense_value.toFixed(0),
+                                                                            "雷霆防御: -" + lightning_defense_value.toFixed(0),
                                                                             "毒素防御: -" + poison_defense_value.toFixed(0),
                                                                             "处决防御: -" + execution_defense_value.toFixed(0),
                                                                             "神圣防御: -" + holy_defense_value.toFixed(0),
