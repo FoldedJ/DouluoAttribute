@@ -92,10 +92,10 @@ attribute:
       poisonDefense: 毒素防御
       executionDefense: 处决防御
       holyDefense: 神圣防御
-      hunlingDiaolv: 魂灵掉率加成
+      hunlingDiaolv: 魂灵掉率
       hunlingxp: 魂灵经验加成
-      hunhuanDiaolv: 魂环掉率加成
-      hunguDiaolv: 魂骨掉率加成
+      hunhuanDiaolv: 魂环掉率
+      hunguDiaolv: 魂骨掉率
       pojiaEffect: 破甲效果
       ispojia: 破甲判断
   # 优先级
