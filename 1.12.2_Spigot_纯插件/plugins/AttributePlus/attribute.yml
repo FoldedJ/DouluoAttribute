@@ -486,7 +486,7 @@ setting:
     split: /
     key: 职业
   # 装备等级限制
-  level: 装备等级
+  level: 魂力需求
   # 装备等级限制标签,等级来源变量
   level-placeholder: '%player_level%'
   # 装备类型
