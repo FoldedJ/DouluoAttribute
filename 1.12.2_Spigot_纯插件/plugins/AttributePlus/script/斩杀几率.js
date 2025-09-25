@@ -26,7 +26,7 @@ function runAttack(Attr, attacker, entity, handle) {
                 // 计算斩杀伤害
                 var kill_damage = health;
                 AttributeAPI.attackTo(entity, attacker, kill_damage.toFixed(0));
-                attacker.sendMessage("§7[§c系统§7] §b你触发了一次§6§l斩杀");
+                attacker.sendMessage("§7[§c系统§7] §b你触发了一次§c§l斩杀");
             }
         }
     }

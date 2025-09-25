@@ -30,6 +30,7 @@ attribute:
       critchance: 暴击几率
       damage_reduction: 伤害减免
       pojiaRate: 破甲几率
+      tear: 撕裂
     # 更新类属性(即属性刷新时触发)
     update:
       health: 生命上限
@@ -40,6 +41,12 @@ attribute:
       poison_attack_addition: 毒素伤害加成
       true_attack_addition: 斗天真伤加成
       holy_attack_addition: 神圣伤害加成
+      executionDefense_addition: 处决防御加成
+      trueDefense_addition: 斗天真防加成
+      poisonDefense_addition: 毒素防御加成
+      holyDefense_addition: 神圣防御加成
+      lightningDefense_addition: 雷霆防御加成
+      resilience: 韧性
     # 运行类属性(即每隔几秒触发一次)
     runtime: {}
     # 其他类属性
@@ -130,6 +137,7 @@ attribute:
       critchance: 73
       damage_reduction: 1004
       pojiaRate: 120
+      tear: 131
     update:
       health: 100
       moving: 101
@@ -139,6 +147,12 @@ attribute:
       poison_attack_addition: 32
       true_attack_addition: 31
       holy_attack_addition: 34
+      executionDefense_addition: 61
+      trueDefense_addition: 57
+      poisonDefense_addition: 59
+      holyDefense_addition: 60
+      lightningDefense_addition: 58
+      resilience: 63
     runtime: {}
   # 属性值生效限制 (超过部分的属性值不生效,但还是可以读取并通过stats查看)
   value:
@@ -228,6 +242,7 @@ attribute:
       critchance: -1.0
       damage_reduction: -1.0
       pojiaRate: -1.0
+      tear: -1.0
     update:
       health: -1.0
       moving: -1.0
@@ -237,6 +252,12 @@ attribute:
       poison_attack_addition: -1.0
       true_attack_addition: -1.0
       holy_attack_addition: -1.0
+      executionDefense_addition: -1.0
+      trueDefense_addition: -1.0
+      poisonDefense_addition: -1.0
+      holyDefense_addition: -1.0
+      lightningDefense_addition: -1.0
+      resilience: -1.0
   # 战斗力
   combatPower:
     attackOrDefense:
@@ -269,6 +290,7 @@ attribute:
       critchance: 1.0
       damage_reduction: 100.0
       pojiaRate: 5.0
+      tear: 5.0
     update:
       health: 5.0
       moving: 5.0
@@ -278,6 +300,12 @@ attribute:
       poison_attack_addition: 1.0
       true_attack_addition: 1.0
       holy_attack_addition: 1.0
+      executionDefense_addition: 1.0
+      trueDefense_addition: 1.0
+      poisonDefense_addition: 1.0
+      holyDefense_addition: 1.0
+      lightningDefense_addition: 1.0
+      resilience: 1.0
     runtime: {}
     other:
       pve_attack: 1.0
@@ -466,9 +494,9 @@ setting:
   equipmentType:
     lore: 装备类型
     list:
-    - 双持
-    - 主手
-    - 副手
+    - 双生武魂
+    - 主武魂
+    - 副武魂
     - 头盔
     - 衣服
     - 裤子

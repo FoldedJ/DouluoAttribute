@@ -36,8 +36,8 @@ function runAttack(Attr, attacker, entity, handle) {
             } else {
                 Attr.addDamage(attacker, damage1.toFixed(0), handle);
                 AttributeAPI.attackTo(entity, attacker, damage2.toFixed(0)); 
-                attacker.sendMessage("§7[§c系统§7] §b你触发了一次§4§l处决§r§b,伤害为§e§l" + damage1.toFixed(0) + "§b并造成了§e§l" + damage2.toFixed(0) + "§b的额外伤害");
-                entity.sendMessage("§7[§c系统§7] §b你受到了一次§4§l处决§r§b,伤害为§e§l" + damage1.toFixed(0)+ "§b并造成了§e§l" + damage2.toFixed(0) + "§b的额外伤害");
+                // attacker.sendMessage("§7[§c系统§7] §b你触发了一次§4§l处决§r§b,伤害为§e§l" + damage1.toFixed(0) + "§b并造成了§e§l" + damage2.toFixed(0) + "§b的额外伤害");
+                // entity.sendMessage("§7[§c系统§7] §b你受到了一次§4§l处决§r§b,伤害为§e§l" + damage1.toFixed(0)+ "§b并造成了§e§l" + damage2.toFixed(0) + "§b的额外伤害");
             }
 		}
 	}

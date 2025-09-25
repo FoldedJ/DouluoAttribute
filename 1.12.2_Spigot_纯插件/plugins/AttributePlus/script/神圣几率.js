@@ -29,8 +29,8 @@ function runAttack(Attr, attacker, entity, handle) {
             entity.sendMessage("§7[§c系统§7] §b你受到了一次§e§l神圣§c§l暴击§r§b,伤害为§e§l" + crit_damage_value.toFixed(0) + "§b,并被削弱了防御");
         } else {
             Attr.addDamage(attacker, damage.toFixed(0), handle);
-            attacker.sendMessage("§7[§c系统§7] §b你触发了一次§e§l神圣§r§b,伤害为§e§l" + damage.toFixed(0) + "§b,并削弱了对方的防御");
-            entity.sendMessage("§7[§c系统§7] §b你受到了一次§e§l神圣§r§b,伤害为§e§l" + damage.toFixed(0) + "§b,并被削弱了防御");
+            // attacker.sendMessage("§7[§c系统§7] §b你触发了一次§e§l神圣§r§b,伤害为§e§l" + damage.toFixed(0) + "§b,并削弱了对方的防御");
+            // entity.sendMessage("§7[§c系统§7] §b你受到了一次§e§l神圣§r§b,伤害为§e§l" + damage.toFixed(0) + "§b,并被削弱了防御");
         }
         var data = Attr.getData(entity, handle)
         // 获取当前对方是否处于神圣状态

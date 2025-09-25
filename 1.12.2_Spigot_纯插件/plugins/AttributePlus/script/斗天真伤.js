@@ -25,8 +25,8 @@ function runAttack(Attr, attacker, entity, handle) {
         entity.sendMessage("§7[§c系统§7] §b你受到了一次§f§l斗天真伤§c§l暴击§r§b,伤害为§e§l" + crit_damage_value.toFixed(0));
     } else {
         Attr.addDamage(attacker, damage.toFixed(0), handle);
-        attacker.sendMessage("§7[§c系统§7] §b你触发了一次§f§l斗天真伤§r§b,伤害为§e§l" + damage.toFixed(0));
-        entity.sendMessage("§7[§c系统§7] §b你受到了一次§f§l斗天真伤§r§b,伤害为§e§l" + damage.toFixed(0));
+        // attacker.sendMessage("§7[§c系统§7] §b你触发了一次§f§l斗天真伤§r§b,伤害为§e§l" + damage.toFixed(0));
+        // entity.sendMessage("§7[§c系统§7] §b你受到了一次§f§l斗天真伤§r§b,伤害为§e§l" + damage.toFixed(0));
     }
     return (damage > 0);
 }

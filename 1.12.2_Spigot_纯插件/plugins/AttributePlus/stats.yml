@@ -114,6 +114,16 @@ gui:
         - "&r处决伤害加成: &a%ap_execution_attack_addition:max%%"
         - " "
         - "&r神圣伤害加成: &a%ap_holy_attack_addition:max%%"
+        - " "
+        - "&r斗天真防加成: &a%ap_trueDefense_addition:max%%"
+        - " "
+        - "&r雷霆防御加成: &a%ap_lightningDefense_addition:max%%"
+        - " "
+        - "&r毒素防御加成: &a%ap_poisonDefense_addition:max%%"
+        - " "
+        - "&r处决防御加成: &a%ap_executionDefense_addition:max%%"
+        - " "
+        - "&r神圣防御加成: &a%ap_holyDefense_addition:max%%"
 
 
     newbee:
@@ -138,7 +148,13 @@ gui:
         - " "
         - "&r魂灵经验加成: &a%ap_hunlingxp:max%%"
         - " "
-        - "&r毒素伤害段: &a%ap_poisonTickDamage:max%%"
+        - "&r毒素伤害段: &a%ap_poisonTickDamage:max%"
+        - " "
+        - "&r撕裂: &a%ap_tear:max%%"
+        - " "
+        - "&r韧性: &a%ap_resilience:max%%"
+        - " "
+        - "&r伤害减免: &a%ap_damage_reduction:max%%"
 
     introduction:
       type: ENCHANTED_BOOK
@@ -158,13 +174,17 @@ gui:
         - " "
         - "&4&l处决: &7触发后，对目标造成&4&l处决伤害&r&7（享受暴击效果），追加造成对方当前&l&c&n10&r&7%的血量的&4&l处决伤害&r&7，冷却时间&l&c&n5&r&7s" 
         - " "
-        - "&6&l斩杀: &7当目标（非玩家）当前血量低于其最大生命值的&6&l&o斩杀百分比&r&7时，造成对方当前剩余生命值的伤害，无冷却时间" 
+        - "&c&l斩杀: &7当目标（非玩家）当前血量低于其最大生命值的&c&l&o斩杀百分比&r&7时，造成对方当前剩余生命值的伤害，无冷却时间" 
         - " "
-        - "&6&l斩杀百分比: &7增加&6&l斩杀&r&7中触发血量的百分比"  
+        - "&c&l斩杀百分比: &7增加&c&l斩杀&r&7中触发血量的百分比"  
         - " "
         - "&8&l破甲: &7触发后，削弱对方当前&8&l&o破甲效果&r&7的各种防御&l&c&n10&r&7s，无冷却时间" 
         - " "
         - "&8&l破甲效果: &7增加&8&l破甲&r&7中削弱目标各种防御的百分比"  
+        - " "
+        - "&6&l撕裂: &7触发后，对目标造成对方当前&l&c&n5&r&7%的血量的&6&l撕裂伤害&r&7，并受到&f&l&o韧性&r&7的影响，无冷却时间"  
+        - " "
+        - "&f&l韧性: &7最高生效&c&n100&r&7点，每&l&c&n1&r&7点&f&l韧性&r&7给予&l&c&n0.1&r&7点&8&l&o伤害减免&r&7以及&l&c&n0.8&r&7%的&6&l&o撕裂伤害&r&7减免"  
 
 
 

@@ -64,8 +64,8 @@ function runAttack(Attr, attacker, entity, handle) {
                             return;
                         }   
                         AttributeAPI.attackTo(entity, attacker, damage.toFixed(0));
-                        attacker.sendMessage("§7[§c系统§7] §b你触发了一次§2§l毒素§r§b,伤害为§e§l" + damage.toFixed(0));
-                        entity.sendMessage("§7[§c系统§7] §b你受到了一次§2§l毒素§r§b,伤害为§e§l" + damage.toFixed(0));
+                        // attacker.sendMessage("§7[§c系统§7] §b你触发了一次§2§l毒素§r§b,伤害为§e§l" + damage.toFixed(0));
+                        // entity.sendMessage("§7[§c系统§7] §b你受到了一次§2§l毒素§r§b,伤害为§e§l" + damage.toFixed(0));
                         // 如果被击杀
                         if (entity.isDead()) {
                             return;
