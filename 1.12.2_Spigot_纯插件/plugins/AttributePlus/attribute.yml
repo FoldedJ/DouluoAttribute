@@ -47,12 +47,16 @@ attribute:
       holyDefense_addition: 神圣防御加成
       lightningDefense_addition: 雷霆防御加成
       resilience: 韧性
+      attack_addition: 伤害加成
+      full_ap: 全属性
+      health_addition: 生命加成
+      defense_addition: 防御加成
     # 运行类属性(即每隔几秒触发一次)
     runtime: {}
     # 其他类属性
     other:
-      pve_attack: PVE伤害
-      pvp_attack: PVP伤害
+      pve_attack: 怪物伤害
+      pvp_attack: 玩家伤害
       crit_damage_resist: 无效暴伤抵抗
       crit_dodge: 无效暴击闪避
       crit_rate: 无效暴伤倍率
@@ -153,6 +157,10 @@ attribute:
       holyDefense_addition: 60
       lightningDefense_addition: 58
       resilience: 63
+      attack_addition: 77
+      full_ap: 1500
+      health_addition: 78
+      defense_addition: 79
     runtime: {}
   # 属性值生效限制 (超过部分的属性值不生效,但还是可以读取并通过stats查看)
   value:
@@ -258,6 +266,10 @@ attribute:
       holyDefense_addition: -1.0
       lightningDefense_addition: -1.0
       resilience: -1.0
+      attack_addition: -1.0
+      full_ap: -1.0
+      health_addition: -1.0
+      defense_addition: -1.0
   # 战斗力
   combatPower:
     attackOrDefense:
@@ -306,6 +318,10 @@ attribute:
       holyDefense_addition: 1.0
       lightningDefense_addition: 1.0
       resilience: 1.0
+      attack_addition: 1.0
+      full_ap: 1.0
+      health_addition: 1.0
+      defense_addition: 1.0
     runtime: {}
     other:
       pve_attack: 1.0
@@ -428,7 +444,7 @@ attribute:
   # 属性全息提示 (需开启 hologramMessage 功能)
   # 前置 HolographicDisplays
   hologram:
-    attack: 造成 {attackerDamage} 点物理伤害
+    attack: 造成 {attackerDamage} 点伤害
   # defense: "抵消 {defense} 点伤害"
   # 属性变量: "内容"
   options:
