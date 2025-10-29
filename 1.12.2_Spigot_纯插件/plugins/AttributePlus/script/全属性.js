@@ -48,7 +48,7 @@ function run(Attr, entity, handle) {
                                                                             "毒素防御: " + attackAdditionValue +"(%)",
                                                                             "处决防御: " + attackAdditionValue +"(%)",
                                                                             "神圣防御: " + attackAdditionValue +"(%)",
-                                                                            "每秒回血: " + attackAdditionValue +"(%)",
+                                                                            "生命恢复: " + attackAdditionValue +"(%)",
                                                                             "斩杀几率: " + attackAdditionValue +"(%)",
                                                                             "破甲几率: " + attackAdditionValue +"(%)",
                                                                             "破甲效果: " + attackAdditionValue +"(%)",

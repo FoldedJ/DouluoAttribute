@@ -40,19 +40,19 @@ function runAttack(Attr, attacker, entity, handle) {
         var isholy = Attr.getRandomValue(entity, "神圣判断", handle);
         if (isholy == 0) {
             // 计算削弱值
-            var defense_value = Attr.getRandomValue(entity, "物理防御", handle) * (0.1 + holy_effect)
-            var true_defense_value = Attr.getRandomValue(entity, "斗天真防", handle) * (0.1 + holy_effect)
-            var lightning_defense_value = Attr.getRandomValue(entity, "雷霆防御", handle) * (0.1 + holy_effect)
-            var poison_defense_value = Attr.getRandomValue(entity, "毒素防御", handle) * (0.1 + holy_effect)
-            var execution_defense_value = Attr.getRandomValue(entity, "处决防御", handle) * (0.1 + holy_effect)
-            var holy_defense_value = Attr.getRandomValue(entity, "神圣防御", handle) * (0.1 + holy_effect)
+            var defense_value = Attr.getRandomValue(entity, "物理防御", handle) / (1 + Attr.getRandomValue(entity, "防御加成", handle) / 100) * (0.1 + holy_effect)
+            var true_defense_value = Attr.getRandomValue(entity, "斗天真防", handle) / (1 + Attr.getRandomValue(entity, "斗天真防加成", handle) / 100) * (0.1 + holy_effect)
+            var lightning_defense_value = Attr.getRandomValue(entity, "雷霆防御", handle) / (1 + Attr.getRandomValue(entity, "雷霆防御加成", handle) / 100) * (0.1 + holy_effect)
+            var poison_defense_value = Attr.getRandomValue(entity, "毒素防御", handle) / (1 + Attr.getRandomValue(entity, "毒素防御加成", handle) / 100) * (0.1 + holy_effect)
+            var execution_defense_value = Attr.getRandomValue(entity, "处决防御", handle) / (1 + Attr.getRandomValue(entity, "处决防御加成", handle) / 100) * (0.1 + holy_effect)
+            var holy_defense_value = Attr.getRandomValue(entity, "神圣防御", handle) / (1 + Attr.getRandomValue(entity, "神圣防御加成", handle) / 100) * (0.1 + holy_effect)
             // 添加削弱效果
-            AttributeAPI.addSourceAttribute(data, "神圣觉醒", Arrays.asList("物理防御: -" + defense_value.toFixed(0), 
-                                                                            "斗天真防: -" + true_defense_value.toFixed(0),
-                                                                            "雷霆防御: -" + lightning_defense_value.toFixed(0),
-                                                                            "毒素防御: -" + poison_defense_value.toFixed(0),
-                                                                            "处决防御: -" + execution_defense_value.toFixed(0),
-                                                                            "神圣防御: -" + holy_defense_value.toFixed(0),
+            AttributeAPI.addSourceAttribute(data, "神圣觉醒", Arrays.asList("物理防御: -" + defense_value.toFixed(2), 
+                                                                            "斗天真防: -" + true_defense_value.toFixed(2),
+                                                                            "雷霆防御: -" + lightning_defense_value.toFixed(2),
+                                                                            "毒素防御: -" + poison_defense_value.toFixed(2),
+                                                                            "处决防御: -" + execution_defense_value.toFixed(2),
+                                                                            "神圣防御: -" + holy_defense_value.toFixed(2),
                                                                             "神圣判断: +1"));
         }
         AttributeAPI.runEntityTask(10000, "神圣任务", entity, false, function(){
