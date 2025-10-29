@@ -31,7 +31,7 @@ function runAttack(Attr, attacker, entity, handle) {
         var heal_amount = (current_health + damage * vam_damage_value > max_health) ? max_health : (current_health + damage * vam_damage_value);
         // 吸血
         attacker.setHealth(heal_amount);
-        attacker.sendMessage("§7[§c系统§7] §b你触发了一次§c§l吸血§r§b,恢复了§e§l" + (damage * vam_damage_value).toFixed(0) + "§b点生命值");
+        attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§4§l吸血§r§a§l,恢复了§2§l" + (damage * vam_damage_value).toFixed(0) + " §a§l点生命值");
 	}
     return chance
 }

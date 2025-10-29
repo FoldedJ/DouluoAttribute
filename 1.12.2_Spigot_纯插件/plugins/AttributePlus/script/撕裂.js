@@ -19,8 +19,8 @@ function runAttack(Attr, attacker, entity, handle) {
         var damage = entity.getHealth() * 0.05 * resilience / 100;
         // 计算最终伤害
         AttributeAPI.attackTo(entity, attacker, damage.toFixed(0)); 
-        attacker.sendMessage("§7[§c系统§7] §b你触发了一次§6§l撕裂");
-        entity.sendMessage("§7[§c系统§7] §b你受到了一次§6§l撕裂");
+        attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§6§l撕裂");
+        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§6§l撕裂");
 	}
     return chance
 }

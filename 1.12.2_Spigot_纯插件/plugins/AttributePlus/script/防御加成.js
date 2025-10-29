@@ -17,7 +17,7 @@ function run(Attr, entity, handle) {
     AttributeAPI.takeSourceAttribute(data, "防御加成属性源");
 
 	if(attackAdditionValue > 0) {
-		AttributeAPI.addSourceAttribute(data, "防御加成属性源", Arrays.asList("防御力: " + attackAdditionValue +"(%)"));
+		AttributeAPI.addSourceAttribute(data, "防御加成属性源", Arrays.asList("物理防御: " + attackAdditionValue +"(%)"));
 	}	
 	return false;
 }

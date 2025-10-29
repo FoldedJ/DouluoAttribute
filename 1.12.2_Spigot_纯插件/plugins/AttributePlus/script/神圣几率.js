@@ -8,43 +8,46 @@ function onLoad(attr) {
     Utils.registerOtherAttribute("神圣伤害", 10.0, "holyDamage");
     Utils.registerOtherAttribute("神圣判断", 1.0, "isholy");
     Utils.registerOtherAttribute("神圣防御", 5.0, "holyDefense");
+    Utils.registerOtherAttribute("神圣躲避", 5.0, "holyDodge");
+    Utils.registerOtherAttribute("神圣觉醒", 5.0, "holyEffect");
     return attr
 }
 
 function runAttack(Attr, attacker, entity, handle) {
     // 计算神圣的几率
-	var chance = Attr.chance(Attr.getRandomValue(attacker, "神圣几率", handle));
+	var chance = Attr.chance(Attr.getRandomValue(attacker, "神圣几率", handle) - Attr.getRandomValue(entity, "神圣躲避", handle));
 
 	if(chance) {
         // 计算基础伤害
         var damage = ((Attr.getRandomValue(attacker, "神圣伤害", handle) - Attr.getRandomValue(entity, "神圣防御", handle)) > 0) ? (Attr.getRandomValue(attacker, "神圣伤害", handle) - Attr.getRandomValue(entity, "神圣防御", handle)) : 0;
         // 计算暴击率
 	    var crit_chance = Attr.chance(Attr.getRandomValue(attacker, "暴击几率", handle) - Attr.getRandomValue(entity, "暴击躲避", handle));
+        var holy_effect = Attr.getRandomValue(attacker, "神圣觉醒", handle) / 100;
         if (crit_chance) {
-            // 计算暴击伤害
-	        var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击伤害",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage > damage ?
-	        ( 100 + Attr.getRandomValue(attacker,"暴击伤害",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage : damage;
+            // 计算暴击倍率
+	        var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage > damage ?
+	        ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage : damage;
             Attr.addDamage(attacker, crit_damage_value.toFixed(0), handle);
-            attacker.sendMessage("§7[§c系统§7] §b你触发了一次§e§l神圣§c§l暴击§r§b,伤害为§e§l" + crit_damage_value.toFixed(0) + "§b,并削弱了对方的防御");
-            entity.sendMessage("§7[§c系统§7] §b你受到了一次§e§l神圣§c§l暴击§r§b,伤害为§e§l" + crit_damage_value.toFixed(0) + "§b,并被削弱了防御");
+            attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + crit_damage_value.toFixed(0) + "§a§l,并削弱了对方的防御");
+            entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + crit_damage_value.toFixed(0) + "§a§l,并被削弱了防御");
         } else {
             Attr.addDamage(attacker, damage.toFixed(0), handle);
-            // attacker.sendMessage("§7[§c系统§7] §b你触发了一次§e§l神圣§r§b,伤害为§e§l" + damage.toFixed(0) + "§b,并削弱了对方的防御");
-            // entity.sendMessage("§7[§c系统§7] §b你受到了一次§e§l神圣§r§b,伤害为§e§l" + damage.toFixed(0) + "§b,并被削弱了防御");
+            attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§r§a§l,伤害为§e§l" + damage.toFixed(0) + "§a§l,并削弱了对方的防御");
+            entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§r§a§l,伤害为§e§l" + damage.toFixed(0) + "§a§l,并被削弱了防御");
         }
         var data = Attr.getData(entity, handle)
         // 获取当前对方是否处于神圣状态
         var isholy = Attr.getRandomValue(entity, "神圣判断", handle);
         if (isholy == 0) {
             // 计算削弱值
-            var defense_value = Attr.getRandomValue(entity, "防御力", handle) * 0.1
-            var true_defense_value = Attr.getRandomValue(entity, "斗天真防", handle) * 0.1
-            var lightning_defense_value = Attr.getRandomValue(entity, "雷霆防御", handle) * 0.1
-            var poison_defense_value = Attr.getRandomValue(entity, "毒素防御", handle) * 0.1
-            var execution_defense_value = Attr.getRandomValue(entity, "处决防御", handle) * 0.1
-            var holy_defense_value = Attr.getRandomValue(entity, "神圣防御", handle) * 0.1
+            var defense_value = Attr.getRandomValue(entity, "物理防御", handle) * (0.1 + holy_effect)
+            var true_defense_value = Attr.getRandomValue(entity, "斗天真防", handle) * (0.1 + holy_effect)
+            var lightning_defense_value = Attr.getRandomValue(entity, "雷霆防御", handle) * (0.1 + holy_effect)
+            var poison_defense_value = Attr.getRandomValue(entity, "毒素防御", handle) * (0.1 + holy_effect)
+            var execution_defense_value = Attr.getRandomValue(entity, "处决防御", handle) * (0.1 + holy_effect)
+            var holy_defense_value = Attr.getRandomValue(entity, "神圣防御", handle) * (0.1 + holy_effect)
             // 添加削弱效果
-            AttributeAPI.addSourceAttribute(data, "神圣效果", Arrays.asList("防御力: -" + defense_value.toFixed(0), 
+            AttributeAPI.addSourceAttribute(data, "神圣觉醒", Arrays.asList("物理防御: -" + defense_value.toFixed(0), 
                                                                             "斗天真防: -" + true_defense_value.toFixed(0),
                                                                             "雷霆防御: -" + lightning_defense_value.toFixed(0),
                                                                             "毒素防御: -" + poison_defense_value.toFixed(0),
@@ -53,8 +56,8 @@ function runAttack(Attr, attacker, entity, handle) {
                                                                             "神圣判断: +1"));
         }
         AttributeAPI.runEntityTask(10000, "神圣任务", entity, false, function(){
-            // 恢复防御力
-            AttributeAPI.takeSourceAttribute(data, "神圣效果");
+            // 恢复物理防御
+            AttributeAPI.takeSourceAttribute(data, "神圣觉醒");
 		})
 	}
     return chance

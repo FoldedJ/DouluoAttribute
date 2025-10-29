@@ -13,8 +13,8 @@ attribute:
       frozen: 冰冻几率
       lightning: 无效雷击几率
       vampire: 无效吸血几率
-      armor: 护甲值
-      defense: 防御力
+      armor: 护甲强度
+      defense: 物理防御
       dodge: 闪避几率
       reflection: 反弹几率
       remote_immune: 箭伤免疫率
@@ -86,7 +86,7 @@ attribute:
       yanmieDamage: 溟灭伤害
       executionDamage: 处决伤害
       poisonDamage: 毒素伤害
-      poisonTickDamage: 毒素伤害段
+      poisonTickDamage: 毒素觉醒
       holyDamage: 神圣伤害
       lightningDamage: 雷霆伤害
       killPercent: 斩杀百分比
@@ -95,7 +95,7 @@ attribute:
       vamResist: 吸血抵抗
       killDamage: 斩杀伤害
       isholy: 神圣判断
-      critdamage_attack: 暴击伤害
+      critdamage_attack: 暴击倍率
       critchance_defense: 暴击躲避
       critdamage_defense: 暴击抵抗
       trueDefense: 斗天真防
@@ -109,6 +109,15 @@ attribute:
       hunguDiaolv: 魂骨掉率
       pojiaEffect: 破甲效果
       ispojia: 破甲判断
+      executionDodge: 处决躲避
+      poisonDodge: 毒素躲避
+      holyDodge: 神圣躲避
+      lightningDodge: 雷霆躲避
+      executionPercent: 处决觉醒
+      holyEffect: 神圣觉醒
+      lightningFinalDamage: 雷霆觉醒
+      trueAwake: 斗天觉醒
+      pojiaResist: 破甲抵抗
   # 优先级
   priority:
     attackOrDefense:
@@ -220,6 +229,15 @@ attribute:
       hunguDiaolv: -1.0
       pojiaEffect: -1.0
       ispojia: -1.0
+      executionDodge: -1.0
+      poisonDodge: -1.0
+      holyDodge: -1.0
+      lightningDodge: -1.0
+      executionPercent: -1.0
+      holyEffect: -1.0
+      lightningFinalDamage: -1.0
+      trueAwake: -1.0
+      pojiaResist: -1.0
     attackOrDefense:
       real_attack: -1.0
       attack: -1.0
@@ -378,6 +396,15 @@ attribute:
       hunguDiaolv: 0.0
       pojiaEffect: 10.0
       ispojia: 1.0
+      executionDodge: 5.0
+      poisonDodge: 5.0
+      holyDodge: 5.0
+      lightningDodge: 10.0
+      executionPercent: 5.0
+      holyEffect: 5.0
+      lightningFinalDamage: 10.0
+      trueAwake: 5.0
+      pojiaResist: 1.0
   # 属性公式
   # {attackerAttack} 当前 被攻击者 所受伤害(受优先级影响)
   # {entityAttack} 当前 攻击者 所受伤害(受优先级影响)(例如反弹伤害)
@@ -421,8 +448,8 @@ attribute:
     # - X
     # - 你抵消了来自 {entityA} 的 {defense} 点伤害,最终于伤害 {attackerDamage}
     dodge:
-    - '&7[&c系统&7] &b对方闪避了你的攻击'
-    - '&7[&c系统&7] &b你触发了一次闪避'
+    - '&7[&c战斗提示&7] &a&l对方闪避了你的攻击'
+    - '&7[&c战斗提示&7] &a&l你触发了一次闪避'
   # reflection:
   # - 对方反弹了 {reflection} 点伤害给你.
   # - 你反弹了 {reflection} 点伤害给对方!
@@ -457,7 +484,7 @@ attribute:
     # 默认移动速度
     defaultMoving: 0.25
     # 默认生命力
-    defaultHealth: 20.0
+    defaultHealth: 10.0
     # 是否将生命心数锁定为两排
     # 关闭该项可解决生命上限提升时受到的伤害抖动问题
     # 关闭该项后上限提升的同时,生命心数也会变多(建议配合龙核、萌芽覆盖掉,不然挡屏甚至卡住客户端)
@@ -465,10 +492,10 @@ attribute:
     # RUNTIME类属性的运行间隔(秒)
     runtimeAttributeTime: 5.0
     # 生命力恢复间隔(秒)
-    healthRestoreTime: 10.0
+    healthRestoreTime: 1.0
     # 是否开启 HolographicDisplays 全息功能
-    hologramMessage: true
-    # 防御系数(即 (PVE防御+PVP防御+防御力属性生效值的和) * 系数值)
+    hologramMessage: false
+    # 防御系数(即 (PVE防御+PVP防御+物理防御属性生效值的和) * 系数值)
     defenseCoefficient: 1.0
     # 攻击系数(即 (PVE攻击+PVP攻击+攻击力属性生效值的和) * 系数值)
     attackCoefficient: 1.0
@@ -508,20 +535,20 @@ setting:
   # 装备类型
   # 例如 [装备类型: 双持]
   equipmentType:
-    lore: 装备类型
+    lore: 物品类型
     list:
     - 双生武魂
     - 主武魂
     - 副武魂
     - 头盔
-    - 衣服
-    - 裤子
-    - 鞋子
+    - 护甲
+    - 护腿
+    - 战靴
   options:
     # 仅启用插件属性伤害 (关闭后 {attack} {overAttack} 也会附上其他插件的伤害数值)
     pluginDamage: true
     # 原版伤害 (pluginDamage 为 true 时,此处默认 false)
-    defaultDamage: false
+    defaultDamage: true
     # 原版护甲 (1.9+功能 原版护甲为百分比抵消伤害，会影响插件伤害的准确性，默认关闭)
     defaultArmor: false
     # 开启后装备等级限制将根据玩家职业等级进行判断
