@@ -34,13 +34,13 @@ function runAttack(Attr, attacker, entity, handle) {
 	            ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage1 : damage1;
                 Attr.addDamage(attacker, crit_damage_value.toFixed(0), handle);
                 AttributeAPI.attackTo(entity, attacker, damage2.toFixed(0)); 
-                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§4§l处决§c§l暴击§r§a§l,伤害为§c§l" + crit_damage_value.toFixed(0) + "§a§l并造成了§f§l" + damage2.toFixed(0) + "§a§l的额外伤害");
-                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§4§l处§c§l决暴击§r§a§l,伤害为§c§l" + crit_damage_value.toFixed(0)+ "§a§l并造成了§f§l" + damage2.toFixed(0) + "§a§l的额外伤害");
+                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§4§l处决§c§l暴击§r§a§l,伤害为§c§l" + (crit_damage_value * real_reduction / 100).toFixed(0) + "§a§l并造成了§f§l" + damage2.toFixed(0) + "§a§l的额外伤害");
+                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§4§l处§c§l决暴击§r§a§l,伤害为§c§l" + (crit_damage_value * real_reduction / 100).toFixed(0)+ "§a§l并受到了§f§l" + damage2.toFixed(0) + "§a§l的额外伤害");
             } else {
                 Attr.addDamage(attacker, damage1.toFixed(0), handle);
                 AttributeAPI.attackTo(entity, attacker, damage2.toFixed(0)); 
-                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§4§l处决§r§a§l,伤害为§c§l" + damage1.toFixed(0) + "§a§l并造成了§f§l" + damage2.toFixed(0) + "§a§l的额外伤害");
-                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§4§l处决§r§a§l,伤害为§c§l" + damage1.toFixed(0)+ "§a§l并造成了§f§l" + damage2.toFixed(0) + "§a§l的额外伤害");
+                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§4§l处决§r§a§l,伤害为§c§l" + (damage1 * real_reduction / 100).toFixed(0) + "§a§l并造成了§f§l" + damage2.toFixed(0) + "§a§l的额外伤害");
+                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§4§l处决§r§a§l,伤害为§c§l" + (damage1 * real_reduction / 100).toFixed(0)+ "§a§l并受到了§f§l" + damage2.toFixed(0) + "§a§l的额外伤害");
             }
 		}
 	}

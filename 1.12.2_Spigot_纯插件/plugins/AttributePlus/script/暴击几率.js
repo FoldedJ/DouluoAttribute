@@ -13,6 +13,8 @@ function onLoad(attr){
 }
 
 function runAttack(attr, attacker, entity, handle){
+    // 有效伤害减免
+    var real_reduction = (attr.getRandomValue(entity, "伤害减免", handle) >= 80) ? 0.2 : (1 - attr.getRandomValue(entity, "伤害减免", handle) / 100);
     // 获取物理伤害
     var damage = ((attr.getRandomValue(attacker, "物理伤害", handle) - attr.getRandomValue(entity, "物理防御", handle)) > 0) ? (attr.getRandomValue(attacker, "物理伤害", handle) - attr.getRandomValue(entity, "物理防御", handle)) : 0;
     // 计算暴击率
@@ -24,7 +26,8 @@ function runAttack(attr, attacker, entity, handle){
     
     if (critchance) {
         attr.setDamage(attacker, finaldamage.toFixed(0), handle)
-        attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§c§l暴击§r§a§l,伤害为§c§l"+finaldamage.toFixed(0))    
+        attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§c§l暴击§r§a§l,伤害为§c§l"+(finaldamage * real_reduction).toFixed(0))  
+        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§c§l暴击§r§a§l,伤害为§c§l"+(finaldamage * real_reduction).toFixed(0))  
     }
 
     return critchance

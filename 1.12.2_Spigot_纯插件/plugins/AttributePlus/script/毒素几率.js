@@ -75,7 +75,7 @@ function runAttack(Attr, attacker, entity, handle) {
                         }
                         AttributeAPI.attackTo(entity, attacker, crit_damage_value.toFixed(0));
                         attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + crit_damage_value.toFixed(0));
-                        entity.sendMessage("§7[§c战斗提示§7] §a§l你收到了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + crit_damage_value.toFixed(0));
+                        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + crit_damage_value.toFixed(0));
                         // 如果被击杀
                         if (entity.isDead() || entity.getKiller() == null) {
                             return;
@@ -110,7 +110,7 @@ function runAttack(Attr, attacker, entity, handle) {
                         } 
                         AttributeAPI.attackTo(entity, attacker, crit_damage_value.toFixed(0));
                         attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + crit_damage_value.toFixed(0));
-                        entity.sendMessage("§7[§c战斗提示§7] §a§l你收到了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + crit_damage_value.toFixed(0));
+                        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + crit_damage_value.toFixed(0));
                         // 如果被击杀
                         if (entity.isDead() || entity.getKiller() == null) {
                             return;
@@ -142,7 +142,7 @@ function runAttack(Attr, attacker, entity, handle) {
                     } 
                     AttributeAPI.attackTo(entity, attacker, (crit_damage_value * res).toFixed(0));
                     attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + (crit_damage_value * res).toFixed(0));
-                    entity.sendMessage("§7[§c战斗提示§7] §a§l你收到了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + (crit_damage_value * res).toFixed(0));
+                    entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + (crit_damage_value * res).toFixed(0));
                     // 如果被击杀
                     if (entity.isDead() || entity.getKiller() == null) {
                         return;
@@ -179,7 +179,7 @@ function runAttack(Attr, attacker, entity, handle) {
                         }                           
                         AttributeAPI.attackTo(entity, attacker, damage.toFixed(0));
                         attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§r§a§l,伤害为§5§l" + damage.toFixed(0));
-                        entity.sendMessage("§7[§c战斗提示§7] §a§l你收到了一次§5§l毒素§r§a§l,伤害为§5§l" + damage.toFixed(0));
+                        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§r§a§l,伤害为§5§l" + damage.toFixed(0));
                         // 如果被击杀
                         if (entity.isDead()) {
                             return;
@@ -214,7 +214,7 @@ function runAttack(Attr, attacker, entity, handle) {
                         }  
                         AttributeAPI.attackTo(entity, attacker, damage.toFixed(0));
                         attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§r§a§l,伤害为§5§l" + damage.toFixed(0));
-                        entity.sendMessage("§7[§c战斗提示§7] §a§l你收到了一次§5§l毒素§r§a§l,伤害为§5§l" + damage.toFixed(0));
+                        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§r§a§l,伤害为§5§l" + damage.toFixed(0));
                         // 如果被击杀
                         if (entity.isDead()) {
                             return;
@@ -246,7 +246,7 @@ function runAttack(Attr, attacker, entity, handle) {
                     }  
                     AttributeAPI.attackTo(entity, attacker, (damage * res).toFixed(0));
                     attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§r§a§l,伤害为§5§l" + (damage * res).toFixed(0));
-                    entity.sendMessage("§7[§c战斗提示§7] §a§l你收到了一次§5§l毒素§r§a§l,伤害为§5§l" + (damage * res).toFixed(0));
+                    entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§r§a§l,伤害为§5§l" + (damage * res).toFixed(0));
                     // 如果被击杀
                     if (entity.isDead()) {
                         return;

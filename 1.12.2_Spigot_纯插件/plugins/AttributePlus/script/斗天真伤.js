@@ -12,6 +12,8 @@ function onLoad(attr) {
 }
 
 function runAttack(Attr, attacker, entity, handle) {
+    // 有效伤害减免
+    var real_reduction = (Attr.getRandomValue(entity, "伤害减免", handle) >= 80) ? 0.2 : (1 - Attr.getRandomValue(entity, "伤害减免", handle) / 100);
     // 计算基础斗天真伤
     var damage = ((Attr.getRandomValue(attacker, "斗天真伤", handle) - Attr.getRandomValue(entity, "斗天真防", handle)) > 0) ? (Attr.getRandomValue(attacker, "斗天真伤", handle) - Attr.getRandomValue(entity, "斗天真防", handle)) : 0;
     // 计算暴击率
@@ -22,12 +24,12 @@ function runAttack(Attr, attacker, entity, handle) {
 	( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle)) / 100 * damage * true_awake : damage;
     if (crit_chance && true_awake > 0) {
         Attr.addDamage(attacker, crit_damage_value.toFixed(0), handle);
-        attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§f§l斗天真伤§c§l暴击§r§a§l,伤害为§f§l" + crit_damage_value.toFixed(0));
-        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§f§l斗天真伤§c§l暴击§r§a§l,伤害为§f§l" + crit_damage_value.toFixed(0));
+        attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§f§l斗天真伤§c§l暴击§r§a§l,伤害为§f§l" + (crit_damage_value * real_reduction).toFixed(0));
+        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§f§l斗天真伤§c§l暴击§r§a§l,伤害为§f§l" + (crit_damage_value * real_reduction).toFixed(0));
     } else {
         Attr.addDamage(attacker, damage.toFixed(0), handle);
-        attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§f§l斗天真伤§r§a§l,伤害为§f§l" + damage.toFixed(0));
-        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§f§l斗天真伤§r§a§l,伤害为§f§l" + damage.toFixed(0));
+        attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§f§l斗天真伤§r§a§l,伤害为§f§l" + (damage * real_reduction).toFixed(0));
+        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§f§l斗天真伤§r§a§l,伤害为§f§l" + (damage * real_reduction).toFixed(0));
     }
     return (damage > 0);
 }

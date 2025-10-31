@@ -1,4 +1,4 @@
-var priority = 102
+var priority = 120
 var combatPower = 5.0
 var attributeName = "神圣几率"
 var attributeType = "ATTACK"
@@ -18,6 +18,8 @@ function runAttack(Attr, attacker, entity, handle) {
 	var chance = Attr.chance(Attr.getRandomValue(attacker, "神圣几率", handle) - Attr.getRandomValue(entity, "神圣躲避", handle));
 
 	if(chance) {
+        // 有效伤害减免
+        var real_reduction = (Attr.getRandomValue(entity, "伤害减免", handle) >= 80) ? 0.2 : (1 - Attr.getRandomValue(entity, "伤害减免", handle) / 100);
         // 计算基础伤害
         var damage = ((Attr.getRandomValue(attacker, "神圣伤害", handle) - Attr.getRandomValue(entity, "神圣防御", handle)) > 0) ? (Attr.getRandomValue(attacker, "神圣伤害", handle) - Attr.getRandomValue(entity, "神圣防御", handle)) : 0;
         // 计算暴击率
@@ -28,12 +30,12 @@ function runAttack(Attr, attacker, entity, handle) {
 	        var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage > damage ?
 	        ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage : damage;
             Attr.addDamage(attacker, crit_damage_value.toFixed(0), handle);
-            attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + crit_damage_value.toFixed(0) + "§a§l,并削弱了对方的防御");
-            entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + crit_damage_value.toFixed(0) + "§a§l,并被削弱了防御");
+            attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction).toFixed(0) + "§a§l,并削弱了对方的防御");
+            entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction).toFixed(0) + "§a§l,并被削弱了防御");
         } else {
             Attr.addDamage(attacker, damage.toFixed(0), handle);
-            attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§r§a§l,伤害为§e§l" + damage.toFixed(0) + "§a§l,并削弱了对方的防御");
-            entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§r§a§l,伤害为§e§l" + damage.toFixed(0) + "§a§l,并被削弱了防御");
+            attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0) + "§a§l,并削弱了对方的防御");
+            entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0) + "§a§l,并被削弱了防御");
         }
         var data = Attr.getData(entity, handle)
         // 获取当前对方是否处于神圣状态
