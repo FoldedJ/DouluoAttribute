@@ -40,7 +40,9 @@ function runAttack(Attr, attacker, entity, handle) {
 
             var data = Attr.getData(entity, handle);
             var counter = data.counter.getCounter("毒素触发", "DEATH");
+            var counter2 = data.counter.getCounter("毒素触发2", "DEATH");
             var counterValue = counter.updateValue(1, 0);
+            var counterValue2 = counter2.updateValue(1, 0);
 
             // 计算最终伤害
             if (crit_chance) {
@@ -154,7 +156,7 @@ function runAttack(Attr, attacker, entity, handle) {
                 // 全是整数
                 if (res == 1) {
                     for (var i = 0; i < poison_tick_damage_ceil + 2; ++i) {
-                    AttributeAPI.runEntityTask(500 * i, "毒素任务" + i, attacker, false, function() {
+                    AttributeAPI.runEntityTask(500 * i, "毒素任务" + (i + 10000 * counterValue2), attacker, false, function() {
                         // 如果被击杀
                         if (entity.isDead()) {
                             return;
@@ -189,7 +191,7 @@ function runAttack(Attr, attacker, entity, handle) {
                 } else {
                     // 需要进行一次残差打击
                     for (var i = 0; i < poison_tick_damage_ceil + 1; ++i) {
-                        AttributeAPI.runEntityTask(500 * i, "毒素任务" + i, attacker, false, function() {
+                        AttributeAPI.runEntityTask(500 * i, "毒素任务" + (i + 10000 * counterValue2), attacker, false, function() {
                         // 如果被击杀
                         if (entity.isDead()) {
                             return;

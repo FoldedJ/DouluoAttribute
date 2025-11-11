@@ -1,4 +1,4 @@
-var priority = 1500
+var priority = 15
 var combatPower = 1.0
 var attributeName = "全属性"
 var attributeType = "UPDATE"
@@ -17,9 +17,7 @@ function run(Attr, entity, handle) {
     AttributeAPI.takeSourceAttribute(data, "全属性属性源");
 
 	if(attackAdditionValue > 0) {
-		AttributeAPI.addSourceAttribute(data, "全属性属性源", Arrays.asList("物理伤害: " + attackAdditionValue +"(%)",
-                                                                            "怪物伤害: " + attackAdditionValue +"(%)",  
-                                                                            "玩家伤害: " + attackAdditionValue +"(%)",
+		AttributeAPI.addSourceAttribute(data, "全属性属性源", Arrays.asList("伤害加成: " + attackAdditionValue,
                                                                             "暴击几率: " + attackAdditionValue +"(%)",
                                                                             "暴击倍率: " + attackAdditionValue +"(%)",
                                                                             "吸血几率: " + attackAdditionValue +"(%)",
@@ -27,33 +25,30 @@ function run(Attr, entity, handle) {
                                                                             "命中几率: " + attackAdditionValue +"(%)",
                                                                             "吸血倍率: " + attackAdditionValue +"(%)",
                                                                             "命中几率: " + attackAdditionValue +"(%)",
-                                                                            "斗天真伤: " + attackAdditionValue +"(%)",
+                                                                        
                                                                             "雷霆几率: " + attackAdditionValue +"(%)",
-                                                                            "雷霆伤害: " + attackAdditionValue +"(%)",
+                                                                       
                                                                             "毒素几率: " + attackAdditionValue +"(%)",
-                                                                            "毒素伤害: " + attackAdditionValue +"(%)",
+                                                                        
                                                                             "处决几率: " + attackAdditionValue +"(%)",
-                                                                            "处决伤害: " + attackAdditionValue +"(%)",
+                                                                        
                                                                             "神圣几率: " + attackAdditionValue +"(%)",
-                                                                            "神圣伤害: " + attackAdditionValue +"(%)",
-                                                                            "生命上限: " + attackAdditionValue +"(%)",
-                                                                            "物理防御: " + attackAdditionValue +"(%)",
+                                                                        
+                                                                            "生命加成: " + attackAdditionValue,
+                                                                            "防御加成: " + attackAdditionValue,
                                                                             "暴击躲避: " + attackAdditionValue +"(%)",
                                                                             "暴击抵抗: " + attackAdditionValue +"(%)",
                                                                             "吸血躲避: " + attackAdditionValue +"(%)",
                                                                             "吸血抵抗: " + attackAdditionValue +"(%)",
                                                                             "闪避几率: " + attackAdditionValue +"(%)",
-                                                                            "斗天真防: " + attackAdditionValue +"(%)",
-                                                                            "雷霆防御: " + attackAdditionValue +"(%)",
-                                                                            "毒素防御: " + attackAdditionValue +"(%)",
-                                                                            "处决防御: " + attackAdditionValue +"(%)",
-                                                                            "神圣防御: " + attackAdditionValue +"(%)",
+                                                                            "斗天真防加成: " + attackAdditionValue,
+                                                                            "雷霆防御加成: " + attackAdditionValue,
+                                                                            "毒素防御加成: " + attackAdditionValue,
+                                                                            "处决防御加成: " + attackAdditionValue,
+                                                                            "神圣防御加成: " + attackAdditionValue,
                                                                             "生命恢复: " + attackAdditionValue +"(%)",
-                                                                            "斩杀几率: " + attackAdditionValue +"(%)",
                                                                             "破甲几率: " + attackAdditionValue +"(%)",
-                                                                            "破甲效果: " + attackAdditionValue +"(%)",
-                                                                            "撕裂: " + attackAdditionValue +"(%)",
-                                                                            "韧性: " + attackAdditionValue +"(%)"));
+                                                                            "破甲效果: " + attackAdditionValue +"(%)"));
 	}	
 	return false;
 }

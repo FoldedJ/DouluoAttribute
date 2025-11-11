@@ -20,8 +20,7 @@ function runAttack(Attr, attacker, entity, handle) {
 	var crit_chance = Attr.chance(Attr.getRandomValue(attacker, "暴击几率", handle) - Attr.getRandomValue(entity, "暴击躲避", handle));
     // 获取斗天觉醒
     var true_awake = Attr.getRandomValue(attacker, "斗天觉醒", handle) / 100;
-    var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle)) / 100 * damage * true_awake > damage ?
-	( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle)) / 100 * damage * true_awake : damage;
+    var crit_damage_value = ( 1 + true_awake ) * damage
     if (crit_chance && true_awake > 0) {
         Attr.addDamage(attacker, crit_damage_value.toFixed(0), handle);
         attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§f§l斗天真伤§c§l暴击§r§a§l,伤害为§f§l" + (crit_damage_value * real_reduction).toFixed(0));

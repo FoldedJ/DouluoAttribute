@@ -25,42 +25,57 @@ function runAttack(Attr, attacker, entity, handle) {
         // 计算暴击率
 	    var crit_chance = Attr.chance(Attr.getRandomValue(attacker, "暴击几率", handle) - Attr.getRandomValue(entity, "暴击躲避", handle));
         var holy_effect = Attr.getRandomValue(attacker, "神圣觉醒", handle) / 100;
-        if (crit_chance) {
-            // 计算暴击倍率
-	        var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage > damage ?
-	        ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage : damage;
-            Attr.addDamage(attacker, crit_damage_value.toFixed(0), handle);
-            attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction).toFixed(0) + "§a§l,并削弱了对方的防御");
-            entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction).toFixed(0) + "§a§l,并被削弱了防御");
-        } else {
-            Attr.addDamage(attacker, damage.toFixed(0), handle);
-            attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0) + "§a§l,并削弱了对方的防御");
-            entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0) + "§a§l,并被削弱了防御");
-        }
-        var data = Attr.getData(entity, handle)
-        // 获取当前对方是否处于神圣状态
-        var isholy = Attr.getRandomValue(entity, "神圣判断", handle);
-        if (isholy == 0) {
-            // 计算削弱值
-            var defense_value = Attr.getRandomValue(entity, "物理防御", handle) / (1 + Attr.getRandomValue(entity, "防御加成", handle) / 100) * (0.1 + holy_effect)
-            var true_defense_value = Attr.getRandomValue(entity, "斗天真防", handle) / (1 + Attr.getRandomValue(entity, "斗天真防加成", handle) / 100) * (0.1 + holy_effect)
-            var lightning_defense_value = Attr.getRandomValue(entity, "雷霆防御", handle) / (1 + Attr.getRandomValue(entity, "雷霆防御加成", handle) / 100) * (0.1 + holy_effect)
-            var poison_defense_value = Attr.getRandomValue(entity, "毒素防御", handle) / (1 + Attr.getRandomValue(entity, "毒素防御加成", handle) / 100) * (0.1 + holy_effect)
-            var execution_defense_value = Attr.getRandomValue(entity, "处决防御", handle) / (1 + Attr.getRandomValue(entity, "处决防御加成", handle) / 100) * (0.1 + holy_effect)
-            var holy_defense_value = Attr.getRandomValue(entity, "神圣防御", handle) / (1 + Attr.getRandomValue(entity, "神圣防御加成", handle) / 100) * (0.1 + holy_effect)
-            // 添加削弱效果
-            AttributeAPI.addSourceAttribute(data, "神圣觉醒", Arrays.asList("物理防御: -" + defense_value.toFixed(2), 
+        if (Utils.hasCooling("神圣冷却组", attacker, 4.0)) {
+            if (crit_chance) {
+                // 计算暴击倍率
+	            var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage > damage ?
+	            ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage : damage;
+                Attr.addDamage(attacker, crit_damage_value.toFixed(0), handle);
+                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction).toFixed(0) + "§a§l,并削弱了对方的防御");
+                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction).toFixed(0) + "§a§l,并被削弱了防御");
+            } else {
+                Attr.addDamage(attacker, damage.toFixed(0), handle);
+                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0) + "§a§l,并削弱了对方的防御");
+                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0) + "§a§l,并被削弱了防御");
+            }
+            var data = Attr.getData(entity, handle)
+            // 获取当前对方是否处于神圣状态
+            var isholy = Attr.getRandomValue(entity, "神圣判断", handle);
+            if (isholy == 0) {
+                // 计算削弱值
+                var defense_value = Attr.getRandomValue(entity, "物理防御", handle) / (1 + Attr.getRandomValue(entity, "防御加成", handle) / 100) * (0.1 + holy_effect)
+                var true_defense_value = Attr.getRandomValue(entity, "斗天真防", handle) / (1 + Attr.getRandomValue(entity, "斗天真防加成", handle) / 100) * (0.1 + holy_effect)
+                var lightning_defense_value = Attr.getRandomValue(entity, "雷霆防御", handle) / (1 + Attr.getRandomValue(entity, "雷霆防御加成", handle) / 100) * (0.1 + holy_effect)
+                var poison_defense_value = Attr.getRandomValue(entity, "毒素防御", handle) / (1 + Attr.getRandomValue(entity, "毒素防御加成", handle) / 100) * (0.1 + holy_effect)
+                var execution_defense_value = Attr.getRandomValue(entity, "处决防御", handle) / (1 + Attr.getRandomValue(entity, "处决防御加成", handle) / 100) * (0.1 + holy_effect)
+                var holy_defense_value = Attr.getRandomValue(entity, "神圣防御", handle) / (1 + Attr.getRandomValue(entity, "神圣防御加成", handle) / 100) * (0.1 + holy_effect)
+                // 添加削弱效果
+                 AttributeAPI.addSourceAttribute(data, "神圣觉醒", Arrays.asList("物理防御: -" + defense_value.toFixed(2), 
                                                                             "斗天真防: -" + true_defense_value.toFixed(2),
                                                                             "雷霆防御: -" + lightning_defense_value.toFixed(2),
                                                                             "毒素防御: -" + poison_defense_value.toFixed(2),
                                                                             "处决防御: -" + execution_defense_value.toFixed(2),
                                                                             "神圣防御: -" + holy_defense_value.toFixed(2),
                                                                             "神圣判断: +1"));
+            }
+            AttributeAPI.runEntityTask(10000, "神圣任务", entity, false, function(){
+                // 恢复物理防御
+                AttributeAPI.takeSourceAttribute(data, "神圣觉醒");
+		    })
+        } else {
+            if (crit_chance) {
+                // 计算暴击倍率
+	            var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage > damage ?
+	            ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage : damage;
+                Attr.addDamage(attacker, crit_damage_value.toFixed(0), handle);
+                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction).toFixed(0));
+                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction).toFixed(0));
+            } else {
+                Attr.addDamage(attacker, damage.toFixed(0), handle);
+                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0));
+                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0));
         }
-        AttributeAPI.runEntityTask(10000, "神圣任务", entity, false, function(){
-            // 恢复物理防御
-            AttributeAPI.takeSourceAttribute(data, "神圣觉醒");
-		})
+        }
 	}
     return chance
 }
