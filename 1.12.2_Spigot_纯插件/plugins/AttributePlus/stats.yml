@@ -27,6 +27,8 @@ gui:
       name: "&6攻击类属性"
       lore:
         - " "
+        - "&r雷霆判断: &a%ap_lightningJudge:max%"
+        - " "
         - "&r物理伤害: &a%ap_attack:max%"
         - " "
         - "&r怪物伤害: &a%ap_pve_attack:max%"
@@ -107,7 +109,7 @@ gui:
         - " "
         - "&r移动速度: &a%ap_moving:max%"
         - " "
-        - "&r每秒回血: &a%ap_restore:max%"
+        - "&r生命恢复: &a%ap_restore:max%"
         - " "
         - "&r经验加成: &a%ap_exp_addition:max%%"
         - " "

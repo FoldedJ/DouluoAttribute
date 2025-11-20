@@ -23,8 +23,14 @@ function runAttack(Attr, attacker, entity, handle) {
             // 计算暴击率
 	        var crit_chance = Attr.chance(Attr.getRandomValue(attacker, "暴击几率", handle) - Attr.getRandomValue(entity, "暴击躲避", handle));
             var final_damage_multiplier = Attr.getRandomValue(attacker, "雷霆觉醒", handle) / 100;
+            // 计算破甲效果值
+            var pojiavalue = ((Attr.getRandomValue(attacker, "破甲效果", handle) - Attr.getRandomValue(entity, "破甲抵抗", handle)) / 100) > 0 ?
+                            ((Attr.getRandomValue(attacker, "破甲效果", handle) - Attr.getRandomValue(entity, "破甲抵抗", handle)) / 100) : 0;
+	        pojiavalue = pojiavalue > 0.6 ? 0.6 : pojiavalue; 
+            // 获取雷霆防御
+            var defense = (Attr.getRandomValue(entity, "雷霆防御", handle) * ( (Attr.getRandomValue(attacker, "破甲判断", handle) == 1) ? (1 - pojiavalue) : 1 ));
             // 计算基础雷霆伤害
-            var damage = ((Attr.getRandomValue(attacker, "雷霆伤害", handle) - Attr.getRandomValue(entity, "雷霆防御", handle)) > 0) ? (Attr.getRandomValue(attacker, "雷霆伤害", handle) - Attr.getRandomValue(entity, "雷霆防御", handle)) : 0;
+            var damage = ((Attr.getRandomValue(attacker, "雷霆伤害", handle) - defense) > 0) ? (Attr.getRandomValue(attacker, "雷霆伤害", handle) - defense) : 0;
 			// 获取雷霆范围
             var lightningRange = Attr.getRandomValue(attacker, "雷霆范围", handle);
             // 计算最终伤害（新增×1.05倍率）
@@ -33,7 +39,8 @@ function runAttack(Attr, attacker, entity, handle) {
                 var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage > damage ?
 	            ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage : damage;
                 // 伤害×1.05后再保留0位小数
-                if (Utils.hasCooling("雷霆冷却组", attacker, 2.0)) {
+                if (Utils.hasCooling("雷霆冷却组", attacker, 3.0)) {
+                    entity.getWorld().strikeLightningEffect(entity.getLocation());
                     Attr.addDamage(attacker, (crit_damage_value * (1.05 + final_damage_multiplier)).toFixed(0), handle);
                     attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§9§l雷霆§c§l暴击§r§a§l,伤害为§9§l" + (crit_damage_value * (1.05 + final_damage_multiplier) * real_reduction).toFixed(0));
                     entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§9§l雷霆§c§l暴击§r§a§l,伤害为§9§l" + (crit_damage_value * (1.05 + final_damage_multiplier) * real_reduction).toFixed(0));
@@ -54,6 +61,7 @@ function runAttack(Attr, attacker, entity, handle) {
                 }
             } else {
                 if (Utils.hasCooling("雷霆冷却组", attacker, 3.0)) {
+                    entity.getWorld().strikeLightningEffect(entity.getLocation());
                     Attr.addDamage(attacker, (damage * (1.2 + final_damage_multiplier)).toFixed(0), handle);
                     attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§9§l雷霆§r§a§l,伤害为§9§l" + (damage * (1.2 + final_damage_multiplier) * real_reduction).toFixed(0));
                     entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§9§l雷霆§r§a§l,伤害为§9§l" + (damage * (1.2 + final_damage_multiplier) * real_reduction).toFixed(0));

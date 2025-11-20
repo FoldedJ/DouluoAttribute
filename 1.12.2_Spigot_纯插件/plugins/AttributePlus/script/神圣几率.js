@@ -20,8 +20,14 @@ function runAttack(Attr, attacker, entity, handle) {
 	if(chance) {
         // 有效伤害减免
         var real_reduction = (Attr.getRandomValue(entity, "伤害减免", handle) >= 80) ? 0.2 : (1 - Attr.getRandomValue(entity, "伤害减免", handle) / 100);
+        // 计算破甲效果值
+        var pojiavalue = ((Attr.getRandomValue(attacker, "破甲效果", handle) - Attr.getRandomValue(entity, "破甲抵抗", handle)) / 100) > 0 ?
+                        ((Attr.getRandomValue(attacker, "破甲效果", handle) - Attr.getRandomValue(entity, "破甲抵抗", handle)) / 100) : 0;
+	    pojiavalue = pojiavalue > 0.6 ? 0.6 : pojiavalue; 
+        // 获取神圣防御
+        var defense = (Attr.getRandomValue(entity, "神圣防御", handle) * ( (Attr.getRandomValue(attacker, "破甲判断", handle) == 1) ? (1 - pojiavalue) : 1 ));
         // 计算基础伤害
-        var damage = ((Attr.getRandomValue(attacker, "神圣伤害", handle) - Attr.getRandomValue(entity, "神圣防御", handle)) > 0) ? (Attr.getRandomValue(attacker, "神圣伤害", handle) - Attr.getRandomValue(entity, "神圣防御", handle)) : 0;
+        var damage = ((Attr.getRandomValue(attacker, "神圣伤害", handle) - defense) > 0) ? (Attr.getRandomValue(attacker, "神圣伤害", handle) - defense) : 0;
         // 计算暴击率
 	    var crit_chance = Attr.chance(Attr.getRandomValue(attacker, "暴击几率", handle) - Attr.getRandomValue(entity, "暴击躲避", handle));
         var holy_effect = Attr.getRandomValue(attacker, "神圣觉醒", handle) / 100;

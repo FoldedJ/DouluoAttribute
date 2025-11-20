@@ -118,6 +118,8 @@ attribute:
       lightningFinalDamage: 雷霆觉醒
       trueAwake: 斗天觉醒
       pojiaResist: 破甲抵抗
+      lightningRange: 雷霆范围
+      lightningJudge: 雷霆判断
   # 优先级
   priority:
     attackOrDefense:
@@ -141,15 +143,15 @@ attribute:
       executionDefense: 110
       poisonRate: 103
       poisonDefense: 108
-      holyRate: 102
+      holyRate: 120
       holyDefense: 109
-      lightningRate: 104
+      lightningRate: 160
       lightningDefense: 106
       killRate: 100
       vamRate: 150
       critchance: 73
       damage_reduction: 1004
-      pojiaRate: 120
+      pojiaRate: 1500
       tear: 131
     update:
       health: 100
@@ -167,7 +169,7 @@ attribute:
       lightningDefense_addition: 58
       resilience: 63
       attack_addition: 77
-      full_ap: 1500
+      full_ap: 15
       health_addition: 78
       defense_addition: 79
     runtime: {}
@@ -238,6 +240,8 @@ attribute:
       lightningFinalDamage: -1.0
       trueAwake: -1.0
       pojiaResist: -1.0
+      lightningRange: -1.0
+      lightningJudge: -1.0
     attackOrDefense:
       real_attack: -1.0
       attack: -1.0
@@ -405,6 +409,8 @@ attribute:
       lightningFinalDamage: 10.0
       trueAwake: 5.0
       pojiaResist: 1.0
+      lightningRange: 10.0
+      lightningJudge: 0.0
   # 属性公式
   # {attackerAttack} 当前 被攻击者 所受伤害(受优先级影响)
   # {entityAttack} 当前 攻击者 所受伤害(受优先级影响)(例如反弹伤害)

@@ -15,6 +15,7 @@ function run(Attr, entity, handle) {
 	var data = Attr.getData(entity, handle);
 
     AttributeAPI.takeSourceAttribute(data, "全属性属性源");
+    AttributeAPI.takeSourceAttribute(data, "破甲属性效果");
 
 	if(attackAdditionValue > 0) {
 		AttributeAPI.addSourceAttribute(data, "全属性属性源", Arrays.asList("伤害加成: " + attackAdditionValue,

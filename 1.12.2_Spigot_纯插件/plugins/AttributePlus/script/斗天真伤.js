@@ -14,8 +14,14 @@ function onLoad(attr) {
 function runAttack(Attr, attacker, entity, handle) {
     // 有效伤害减免
     var real_reduction = (Attr.getRandomValue(entity, "伤害减免", handle) >= 80) ? 0.2 : (1 - Attr.getRandomValue(entity, "伤害减免", handle) / 100);
+    // 计算破甲效果值
+    var pojiavalue = ((Attr.getRandomValue(attacker, "破甲效果", handle) - Attr.getRandomValue(entity, "破甲抵抗", handle)) / 100) > 0 ?
+                    ((Attr.getRandomValue(attacker, "破甲效果", handle) - Attr.getRandomValue(entity, "破甲抵抗", handle)) / 100) : 0;
+	pojiavalue = pojiavalue > 0.6 ? 0.6 : pojiavalue; 
+    // 获取斗天真防
+    var defense = (Attr.getRandomValue(entity, "斗天真防", handle) * ( (Attr.getRandomValue(attacker, "破甲判断", handle) == 1) ? (1 - pojiavalue) : 1 ));
     // 计算基础斗天真伤
-    var damage = ((Attr.getRandomValue(attacker, "斗天真伤", handle) - Attr.getRandomValue(entity, "斗天真防", handle)) > 0) ? (Attr.getRandomValue(attacker, "斗天真伤", handle) - Attr.getRandomValue(entity, "斗天真防", handle)) : 0;
+    var damage = ((Attr.getRandomValue(attacker, "斗天真伤", handle) - defense) > 0) ? (Attr.getRandomValue(attacker, "斗天真伤", handle) - defense) : 0;
     // 计算暴击率
 	var crit_chance = Attr.chance(Attr.getRandomValue(attacker, "暴击几率", handle) - Attr.getRandomValue(entity, "暴击躲避", handle));
     // 获取斗天觉醒

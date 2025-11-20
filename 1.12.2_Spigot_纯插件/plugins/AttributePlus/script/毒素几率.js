@@ -34,9 +34,15 @@ function runAttack(Attr, attacker, entity, handle) {
 		if (Utils.hasCooling("毒素冷却组", attacker, 2.0)) {
             // 计算暴击率
 	        var crit_chance = Attr.chance(Attr.getRandomValue(attacker, "暴击几率", handle) - Attr.getRandomValue(entity, "暴击躲避", handle));
+            // 计算破甲效果值
+            var pojiavalue = ((Attr.getRandomValue(attacker, "破甲效果", handle) - Attr.getRandomValue(entity, "破甲抵抗", handle)) / 100) > 0 ?
+                            ((Attr.getRandomValue(attacker, "破甲效果", handle) - Attr.getRandomValue(entity, "破甲抵抗", handle)) / 100) : 0;
+	        pojiavalue = pojiavalue > 0.6 ? 0.6 : pojiavalue; 
+            // 获取毒素防御
+            var defense = (Attr.getRandomValue(entity, "毒素防御", handle) * ( (Attr.getRandomValue(attacker, "破甲判断", handle) == 1) ? (1 - pojiavalue) : 1 ));
             // 计算基础毒素伤害
-            var damage = ((Attr.getRandomValue(attacker, "毒素伤害", handle) - Attr.getRandomValue(entity, "毒素防御", handle)) > 0) ? 
-            (Attr.getRandomValue(attacker, "毒素伤害", handle) - Attr.getRandomValue(entity, "毒素防御", handle)) * real_reduction / 100 : 0;
+            var damage = ((Attr.getRandomValue(attacker, "毒素伤害", handle) - defense) > 0) ? 
+            (Attr.getRandomValue(attacker, "毒素伤害", handle) - defense) * real_reduction / 100 : 0;
 
             var data = Attr.getData(entity, handle);
             var counter = data.counter.getCounter("毒素触发", "DEATH");
