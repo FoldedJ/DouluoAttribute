@@ -121,23 +121,25 @@ attribute:
       pojiaResist: 破甲抵抗
       lightningRange: 雷霆范围
       lightningJudge: 雷霆判断
+    killer:
+      killerTrigger: 神圣击杀触发
   # 优先级
   priority:
     attackOrDefense:
       attack: 2
-      real_attack: 7
-      crit: 8
-      fire: 10
-      frozen: 11
-      lightning: 3
-      vampire: 4
-      armor: 6
+      real_attack: -1
+      crit: -1
+      fire: -1
+      frozen: -1
+      lightning: -1
+      vampire: -1
+      armor: -1
       defense: 5
       dodge: 1
-      reflection: 9
-      remote_immune: 2
-      testAttribute: 103
-      yanmie: 104
+      reflection: -1
+      remote_immune: -1
+      testAttribute: -1
+      yanmie: -1
       trueDamage: 105
       trueDefense: 107
       executionRate: 101
@@ -158,7 +160,7 @@ attribute:
     update:
       health: 100
       moving: 101
-      restore_ratio: 53
+      restore_ratio: -1
       lighting_attack_addition: 30
       execution_attack_addition: 33
       poison_attack_addition: 32
@@ -175,6 +177,8 @@ attribute:
       health_addition: 78
       defense_addition: 79
     runtime: {}
+    killer:
+      killerTrigger: 180
   # 属性值生效限制 (超过部分的属性值不生效,但还是可以读取并通过stats查看)
   value:
     attack: -1.0
@@ -295,6 +299,8 @@ attribute:
       full_ap: -1.0
       health_addition: -1.0
       defense_addition: -1.0
+    killer:
+      killerTrigger: -1.0
   # 战斗力
   combatPower:
     attackOrDefense:
@@ -415,6 +421,8 @@ attribute:
       pojiaResist: 1.0
       lightningRange: 10.0
       lightningJudge: 0.0
+    killer:
+      killerTrigger: 1.0
   # 属性公式
   # {attackerAttack} 当前 被攻击者 所受伤害(受优先级影响)
   # {entityAttack} 当前 攻击者 所受伤害(受优先级影响)(例如反弹伤害)

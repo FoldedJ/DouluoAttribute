@@ -45,6 +45,7 @@ function runAttack(Attr, attacker, entity, handle) {
                 entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0) + "§a§l,并被削弱了防御");
             }
             var data = Attr.getData(entity, handle)
+            var data2 = Attr.getData(attacker, handle)
             // 获取当前对方是否处于神圣状态
             var isholy = Attr.getRandomValue(entity, "神圣判断", handle);
             if (isholy == 0) {
@@ -56,13 +57,14 @@ function runAttack(Attr, attacker, entity, handle) {
                 var execution_defense_value = Attr.getRandomValue(entity, "处决防御", handle) / (1 + Attr.getRandomValue(entity, "处决防御加成", handle) / 100) * (0.1 + holy_effect)
                 var holy_defense_value = Attr.getRandomValue(entity, "神圣防御", handle) / (1 + Attr.getRandomValue(entity, "神圣防御加成", handle) / 100) * (0.1 + holy_effect)
                 // 添加削弱效果
-                 AttributeAPI.addSourceAttribute(data, "神圣觉醒", Arrays.asList("物理防御: -" + defense_value.toFixed(2), 
+                AttributeAPI.addSourceAttribute(data, "神圣觉醒", Arrays.asList("物理防御: -" + defense_value.toFixed(2), 
                                                                             "斗天真防: -" + true_defense_value.toFixed(2),
                                                                             "雷霆防御: -" + lightning_defense_value.toFixed(2),
                                                                             "毒素防御: -" + poison_defense_value.toFixed(2),
                                                                             "处决防御: -" + execution_defense_value.toFixed(2),
                                                                             "神圣防御: -" + holy_defense_value.toFixed(2),
                                                                             "神圣判断: +1"));
+                AttributeAPI.addSourceAttribute(data2, "神圣击杀", Arrays.asList("神圣击杀触发: +1"));
             }
             AttributeAPI.runEntityTask(10000, "神圣任务", entity, false, function(){
                 // 恢复物理防御
