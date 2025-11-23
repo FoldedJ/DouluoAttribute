@@ -1,0 +1,8 @@
+# Ignore everything
+*
+
+# Unignore the specific directory and its contents
+!/1.12.2_Spigot_纯插件/plugins/AttributePlus/
+!/1.12.2_Spigot_纯插件/plugins/AttributePlus/**
+!.gitignore
+/1.12.2_Spigot_纯插件/plugins/AttributePlus/data.db

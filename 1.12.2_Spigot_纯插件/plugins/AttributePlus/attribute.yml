@@ -31,6 +31,7 @@ attribute:
       damage_reduction: 伤害减免
       pojiaRate: 破甲几率
       tear: 撕裂
+      skilldamage: 技能伤害
     # 更新类属性(即属性刷新时触发)
     update:
       health: 生命上限
@@ -153,6 +154,7 @@ attribute:
       damage_reduction: 1004
       pojiaRate: 1500
       tear: 131
+      skilldamage: 205
     update:
       health: 100
       moving: 101
@@ -273,6 +275,7 @@ attribute:
       damage_reduction: -1.0
       pojiaRate: -1.0
       tear: -1.0
+      skilldamage: -1.0
     update:
       health: -1.0
       moving: -1.0
@@ -325,6 +328,7 @@ attribute:
       damage_reduction: 100.0
       pojiaRate: 5.0
       tear: 5.0
+      skilldamage: 1.0
     update:
       health: 5.0
       moving: 5.0
