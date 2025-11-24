@@ -97,45 +97,48 @@ function runAttack(Attr, attacker, entity, handle) {
                 } else {
                     var flag2 = 0;
                     // 需要进行一次残差打击
-                    for (var i = 0; i < poison_tick_damage_ceil + 1; ++i) {
-                        AttributeAPI.runEntityTask(500 * i, "毒素暴击任务" + (i + 10000 * counterValue), attacker, false, function() {
-                        if (flag2 == 1) {
-                            return;
-                        }
-                        // 计算吸血几率
-                        var xixue_chance = Attr.chance(Attr.getRandomValue(attacker, "吸血几率", handle) - Attr.getRandomValue(entity, "吸血躲避", handle));
-                        // 获取自己的最大生命值
-                        var max_health = attacker.getMaxHealth();
-                        // 获取自己当前的生命值
-                        var current_health = attacker.getHealth();
-                        // 获取自己的吸血倍率
-                        var vam_damage = Attr.getRandomValue(attacker, "吸血倍率", handle);
-                        // 获取对方的吸血抵抗
-                        var vam_resist = Attr.getRandomValue(entity, "吸血抵抗", handle);
-                        // 计算吸血伤害
-                        var vam_damage_value = ((vam_damage - vam_resist) / 100 > 0) ? (vam_damage - vam_resist) / 100 : 0;
-                        var heal_amount = (current_health + crit_damage_value * vam_damage_value * 0.5 > max_health) ? max_health : (current_health + crit_damage_value * vam_damage_value * 0.5);  
-                        if (xixue_chance) {
-                            // 吸血
-                            attacker.setHealth(heal_amount);
-                            attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§4§l吸血§r§a§l,恢复了§2§l" + (crit_damage_value * vam_damage_value * 0.5).toFixed(0) + " §a§l点生命值");
-                        }
-                        // 如果被击杀
-                        if (entity.getHealth() <= crit_damage_value.toFixed(0)) {
+                    for (var i = 0; i < poison_tick_damage_ceil + 2; ++i) {
+                        if (i < poison_tick_damage_ceil + 1) {
+                            AttributeAPI.runEntityTask(500 * i, "毒素暴击任务" + (i + 10000 * counterValue), attacker, false, function() {
+                            if (flag2 == 1) {
+                                return;
+                            }
+                            // 计算吸血几率
+                            var xixue_chance = Attr.chance(Attr.getRandomValue(attacker, "吸血几率", handle) - Attr.getRandomValue(entity, "吸血躲避", handle));
+                            // 获取自己的最大生命值
+                            var max_health = attacker.getMaxHealth();
+                            // 获取自己当前的生命值
+                            var current_health = attacker.getHealth();
+                            // 获取自己的吸血倍率
+                            var vam_damage = Attr.getRandomValue(attacker, "吸血倍率", handle);
+                            // 获取对方的吸血抵抗
+                            var vam_resist = Attr.getRandomValue(entity, "吸血抵抗", handle);
+                            // 计算吸血伤害
+                            var vam_damage_value = ((vam_damage - vam_resist) / 100 > 0) ? (vam_damage - vam_resist) / 100 : 0;
+                            var heal_amount = (current_health + crit_damage_value * vam_damage_value * 0.5 > max_health) ? max_health : (current_health + crit_damage_value * vam_damage_value * 0.5);  
+                            if (xixue_chance) {
+                                // 吸血
+                                attacker.setHealth(heal_amount);
+                                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§4§l吸血§r§a§l,恢复了§2§l" + (crit_damage_value * vam_damage_value * 0.5).toFixed(0) + " §a§l点生命值");
+                            }
+                            // 如果被击杀
+                            if (entity.getHealth() <= crit_damage_value.toFixed(0)) {
+                                AttributeAPI.attackTo(entity, attacker, crit_damage_value.toFixed(0));
+                                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + crit_damage_value.toFixed(0));
+                                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + crit_damage_value.toFixed(0));
+                                flag2 = 1;
+                                return;
+                            }
                             AttributeAPI.attackTo(entity, attacker, crit_damage_value.toFixed(0));
                             attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + crit_damage_value.toFixed(0));
                             entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + crit_damage_value.toFixed(0));
-                            flag2 = 1;
-                            return;
-                        }
-                        AttributeAPI.attackTo(entity, attacker, crit_damage_value.toFixed(0));
-                        attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + crit_damage_value.toFixed(0));
-                        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + crit_damage_value.toFixed(0));
-                        })
-                    }
-                    if (flag2 == 0) {
-                        AttributeAPI.runEntityTask(500 * poison_tick_damage_ceil + 2, "毒素暴击任务" + (poison_tick_damage_ceil + 2 + 10000 * counterValue), attacker, false, function() {
-                            // 计算吸血几率
+                            })
+                        } else {
+                            AttributeAPI.runEntityTask(500 * poison_tick_damage_ceil + 2, "毒素暴击任务" + (poison_tick_damage_ceil + 2 + 10000 * counterValue), attacker, false, function() {
+                            if (flag2 == 1) {
+                                return;
+                            }
+                                // 计算吸血几率
                             var xixue_chance = Attr.chance(Attr.getRandomValue(attacker, "吸血几率", handle) - Attr.getRandomValue(entity, "吸血躲避", handle));
                             // 获取自己的最大生命值
                             var max_health = attacker.getMaxHealth();
@@ -156,7 +159,8 @@ function runAttack(Attr, attacker, entity, handle) {
                             AttributeAPI.attackTo(entity, attacker, (crit_damage_value * res).toFixed(0));
                             attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + (crit_damage_value * res).toFixed(0));
                             entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§c§l暴击§r§a§l,伤害为§5§l" + (crit_damage_value * res).toFixed(0));
-                        })
+                            })
+                        }
                     }
                 }
             } else {
@@ -203,66 +207,70 @@ function runAttack(Attr, attacker, entity, handle) {
                 } else {
                     var flag4 = 0;
                     // 需要进行一次残差打击
-                    for (var i = 0; i < poison_tick_damage_ceil + 1; ++i) {
-                        AttributeAPI.runEntityTask(500 * i, "毒素任务" + (i + 10000 * counterValue2), attacker, false, function() {
-                        if (flag4 == 1) {
-                            return;
-                        }
-                        // 计算吸血几率
-                        var xixue_chance = Attr.chance(Attr.getRandomValue(attacker, "吸血几率", handle) - Attr.getRandomValue(entity, "吸血躲避", handle));
-                        // 获取自己的最大生命值
-                        var max_health = attacker.getMaxHealth();
-                        // 获取自己当前的生命值
-                        var current_health = attacker.getHealth();
-                        // 获取自己的吸血倍率
-                        var vam_damage = Attr.getRandomValue(attacker, "吸血倍率", handle);
-                        // 获取对方的吸血抵抗
-                        var vam_resist = Attr.getRandomValue(entity, "吸血抵抗", handle);
-                        // 计算吸血伤害
-                        var vam_damage_value = ((vam_damage - vam_resist) / 100 > 0) ? (vam_damage - vam_resist) / 100 : 0;
-                        var heal_amount = (current_health + damage * vam_damage_value * 0.5 > max_health) ? max_health : (current_health + damage * vam_damage_value * 0.5);  
-                        if (xixue_chance) {
-                            // 吸血
-                            attacker.setHealth(heal_amount);
-                            attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§4§l吸血§r§a§l,恢复了§2§l" + (damage * vam_damage_value * 0.5).toFixed(0) + " §a§l点生命值");
-                        } 
-                        // 如果被击杀
-                        if (entity.getHealth() <= damage.toFixed(0)) {
+                    for (var i = 0; i < poison_tick_damage_ceil + 2; ++i) {
+                        if (i < poison_tick_damage_ceil + 1) {
+                            AttributeAPI.runEntityTask(500 * i, "毒素任务" + (i + 10000 * counterValue2), attacker, false, function() {
+                            if (flag4 == 1) {
+                                return;
+                            }
+                            // 计算吸血几率
+                            var xixue_chance = Attr.chance(Attr.getRandomValue(attacker, "吸血几率", handle) - Attr.getRandomValue(entity, "吸血躲避", handle));
+                            // 获取自己的最大生命值
+                            var max_health = attacker.getMaxHealth();
+                            // 获取自己当前的生命值
+                            var current_health = attacker.getHealth();
+                            // 获取自己的吸血倍率
+                            var vam_damage = Attr.getRandomValue(attacker, "吸血倍率", handle);
+                            // 获取对方的吸血抵抗
+                            var vam_resist = Attr.getRandomValue(entity, "吸血抵抗", handle);
+                            // 计算吸血伤害
+                            var vam_damage_value = ((vam_damage - vam_resist) / 100 > 0) ? (vam_damage - vam_resist) / 100 : 0;
+                            var heal_amount = (current_health + damage * vam_damage_value * 0.5 > max_health) ? max_health : (current_health + damage * vam_damage_value * 0.5);  
+                            if (xixue_chance) {
+                                // 吸血
+                                attacker.setHealth(heal_amount);
+                                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§4§l吸血§r§a§l,恢复了§2§l" + (damage * vam_damage_value * 0.5).toFixed(0) + " §a§l点生命值");
+                            } 
+                            // 如果被击杀
+                            if (entity.getHealth() <= damage.toFixed(0)) {
+                                AttributeAPI.attackTo(entity, attacker, damage.toFixed(0));
+                                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§r§a§l,伤害为§5§l" + damage.toFixed(0));
+                                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§r§a§l,伤害为§5§l" + damage.toFixed(0));
+                                flag4 = 1;
+                                return;
+                            } 
                             AttributeAPI.attackTo(entity, attacker, damage.toFixed(0));
                             attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§r§a§l,伤害为§5§l" + damage.toFixed(0));
                             entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§r§a§l,伤害为§5§l" + damage.toFixed(0));
-                            flag4 = 1;
-                            return;
-                        } 
-                        AttributeAPI.attackTo(entity, attacker, damage.toFixed(0));
-                        attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§r§a§l,伤害为§5§l" + damage.toFixed(0));
-                        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§r§a§l,伤害为§5§l" + damage.toFixed(0));
-                        })
-                    }
-                    if (flag4 == 0) {
-                        AttributeAPI.runEntityTask(500 * poison_tick_damage_ceil + 2, "毒素任务" + poison_tick_damage_ceil + 2, attacker, false, function() {
-                        // 计算吸血几率
-                        var xixue_chance = Attr.chance(Attr.getRandomValue(attacker, "吸血几率", handle) - Attr.getRandomValue(entity, "吸血躲避", handle));
-                        // 获取自己的最大生命值
-                        var max_health = attacker.getMaxHealth();
-                        // 获取自己当前的生命值
-                        var current_health = attacker.getHealth();
-                        // 获取自己的吸血倍率
-                        var vam_damage = Attr.getRandomValue(attacker, "吸血倍率", handle);
-                        // 获取对方的吸血抵抗
-                        var vam_resist = Attr.getRandomValue(entity, "吸血抵抗", handle);
-                        // 计算吸血伤害
-                        var vam_damage_value = ((vam_damage - vam_resist) / 100 > 0) ? (vam_damage - vam_resist) / 100 : 0;
-                        var heal_amount = (current_health + (damage * res) * vam_damage_value * 0.5 > max_health) ? max_health : (current_health + (damage * res) * vam_damage_value * 0.5);  
-                        if (xixue_chance) {
-                            // 吸血
-                            attacker.setHealth(heal_amount);
-                            attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§4§l吸血§r§a§l,恢复了§2§l" + ((damage * res) * vam_damage_value * 0.5).toFixed(0) + " §a§l点生命值");
-                        }  
-                        AttributeAPI.attackTo(entity, attacker, (damage * res).toFixed(0));
-                        attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§r§a§l,伤害为§5§l" + (damage * res).toFixed(0));
-                        entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§r§a§l,伤害为§5§l" + (damage * res).toFixed(0));
-                        })
+                            })
+                        } else {
+                            AttributeAPI.runEntityTask(500 * poison_tick_damage_ceil + 2, "毒素任务" + poison_tick_damage_ceil + 2, attacker, false, function() {
+                            if (flag4 == 1) {
+                                return;
+                            }
+                            // 计算吸血几率
+                            var xixue_chance = Attr.chance(Attr.getRandomValue(attacker, "吸血几率", handle) - Attr.getRandomValue(entity, "吸血躲避", handle));
+                            // 获取自己的最大生命值
+                            var max_health = attacker.getMaxHealth();
+                            // 获取自己当前的生命值
+                            var current_health = attacker.getHealth();
+                            // 获取自己的吸血倍率
+                            var vam_damage = Attr.getRandomValue(attacker, "吸血倍率", handle);
+                            // 获取对方的吸血抵抗
+                            var vam_resist = Attr.getRandomValue(entity, "吸血抵抗", handle);
+                            // 计算吸血伤害
+                            var vam_damage_value = ((vam_damage - vam_resist) / 100 > 0) ? (vam_damage - vam_resist) / 100 : 0;
+                            var heal_amount = (current_health + (damage * res) * vam_damage_value * 0.5 > max_health) ? max_health : (current_health + (damage * res) * vam_damage_value * 0.5);  
+                            if (xixue_chance) {
+                                // 吸血
+                                attacker.setHealth(heal_amount);
+                                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§4§l吸血§r§a§l,恢复了§2§l" + ((damage * res) * vam_damage_value * 0.5).toFixed(0) + " §a§l点生命值");
+                            }  
+                            AttributeAPI.attackTo(entity, attacker, (damage * res).toFixed(0));
+                            attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§5§l毒素§r§a§l,伤害为§5§l" + (damage * res).toFixed(0));
+                            entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§5§l毒素§r§a§l,伤害为§5§l" + (damage * res).toFixed(0));
+                            })
+                        }
                     }
                 }
             }
