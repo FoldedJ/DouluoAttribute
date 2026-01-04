@@ -32,6 +32,10 @@ attribute:
       pojiaRate: 破甲几率
       tear: 撕裂
       skilldamage: 技能伤害
+      percent_damage: 百分比伤害
+      rebound_chance: 反弹几率
+      store_chance: 储存几率
+      storeDamagePercent: 储存伤害倍率
     # 更新类属性(即属性刷新时触发)
     update:
       health: 生命上限
@@ -121,6 +125,17 @@ attribute:
       pojiaResist: 破甲抵抗
       lightningRange: 雷霆范围
       lightningJudge: 雷霆判断
+      dodgeRebound: 反弹躲避
+      reboundMultiplier: 反弹倍率
+      resistRebound: 反弹抵抗
+      yuansu_baoji: 元素暴率
+      yuansu_baoshang: 元素暴伤
+      yuansu_duobao: 元素躲暴
+      yuansu_baokang: 元素暴抗
+      store_check: 储存判断
+      trueReduction: 真伤减免
+      poisonDamageStore: 毒素伤害转储
+      executionDamageTransfer: 处决伤害转储
     killer:
       killerTrigger: 神圣击杀触发
   # 优先级
@@ -157,6 +172,10 @@ attribute:
       pojiaRate: 1500
       tear: 131
       skilldamage: 205
+      percent_damage: 137
+      rebound_chance: 800
+      store_chance: 74
+      storeDamagePercent: 1501
     update:
       health: 100
       moving: 101
@@ -248,6 +267,17 @@ attribute:
       pojiaResist: -1.0
       lightningRange: -1.0
       lightningJudge: -1.0
+      dodgeRebound: -1.0
+      reboundMultiplier: -1.0
+      resistRebound: -1.0
+      yuansu_baoji: -1.0
+      yuansu_baoshang: -1.0
+      yuansu_duobao: -1.0
+      yuansu_baokang: -1.0
+      store_check: -1.0
+      trueReduction: -1.0
+      poisonDamageStore: -1.0
+      executionDamageTransfer: -1.0
     attackOrDefense:
       real_attack: -1.0
       attack: -1.0
@@ -280,6 +310,10 @@ attribute:
       pojiaRate: -1.0
       tear: -1.0
       skilldamage: -1.0
+      percent_damage: -1.0
+      rebound_chance: -1.0
+      store_chance: -1.0
+      storeDamagePercent: -1.0
     update:
       health: -1.0
       moving: -1.0
@@ -335,6 +369,10 @@ attribute:
       pojiaRate: 5.0
       tear: 5.0
       skilldamage: 1.0
+      percent_damage: 50.0
+      rebound_chance: 10.0
+      store_chance: 1.0
+      storeDamagePercent: 1.0
     update:
       health: 5.0
       moving: 5.0
@@ -421,6 +459,17 @@ attribute:
       pojiaResist: 1.0
       lightningRange: 10.0
       lightningJudge: 0.0
+      dodgeRebound: 5.0
+      reboundMultiplier: 5.0
+      resistRebound: 5.0
+      yuansu_baoji: 1.0
+      yuansu_baoshang: 1.0
+      yuansu_duobao: 1.0
+      yuansu_baokang: 1.0
+      store_check: 1.0
+      trueReduction: 5.0
+      poisonDamageStore: 0.0
+      executionDamageTransfer: 0.0
     killer:
       killerTrigger: 1.0
   # 属性公式

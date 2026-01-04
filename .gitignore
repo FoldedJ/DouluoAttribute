@@ -1,9 +1,54 @@
-# Ignore everything
-*
+# Root directories to ignore
+/template/
+/4.11套装/
+/[压缩包-公开版]DragonCore-2.6.2.9/
 
-# Unignore the specific directory and its contents
-!/1.12.2_Spigot_纯插件/plugins/AttributePlus/
-!/1.12.2_Spigot_纯插件/plugins/AttributePlus/**
-!.gitignore
+# 1.12.2_Spigot_纯插件 - Files
+/1.12.2_Spigot_纯插件/*.jar
+/1.12.2_Spigot_纯插件/*.bat
+/1.12.2_Spigot_纯插件/*.Bat
+/1.12.2_Spigot_纯插件/*.json
+/1.12.2_Spigot_纯插件/*.yml
+/1.12.2_Spigot_纯插件/*.properties
+/1.12.2_Spigot_纯插件/*.txt
+/1.12.2_Spigot_纯插件/*.log
+/1.12.2_Spigot_纯插件/*.lock
+
+# 1.12.2_Spigot_纯插件 - Directories
+/1.12.2_Spigot_纯插件/logs/
+/1.12.2_Spigot_纯插件/world/
+/1.12.2_Spigot_纯插件/world_nether/
+/1.12.2_Spigot_纯插件/world_the_end/
+/1.12.2_Spigot_纯插件/crash-reports/
+/1.12.2_Spigot_纯插件/cache/
+/1.12.2_Spigot_纯插件/libraries/
+/1.12.2_Spigot_纯插件/versions/
+/1.12.2_Spigot_纯插件/assets/
+
+# Plugins - Ignore jars
+/1.12.2_Spigot_纯插件/plugins/*.jar
+
+# Plugins - Ignore other plugin folders
+/1.12.2_Spigot_纯插件/plugins/Essentials/
+/1.12.2_Spigot_纯插件/plugins/MythicMobs/
+/1.12.2_Spigot_纯插件/plugins/GroupManager/
+/1.12.2_Spigot_纯插件/plugins/PlotMe/
+/1.12.2_Spigot_纯插件/plugins/MythicMobsExtension/
+/1.12.2_Spigot_纯插件/plugins/Multiverse-Core/
+/1.12.2_Spigot_纯插件/plugins/EasyKitsRel/
+/1.12.2_Spigot_纯插件/plugins/RichAutoMessage/
+/1.12.2_Spigot_纯插件/plugins/Vault/
+/1.12.2_Spigot_纯插件/plugins/DragonCore/
+/1.12.2_Spigot_纯插件/plugins/DcBanItem/
+/1.12.2_Spigot_纯插件/plugins/MythicCrucible/
+/1.12.2_Spigot_纯插件/plugins/ColorMOTD/
+/1.12.2_Spigot_纯插件/plugins/ChestCommands/
+/1.12.2_Spigot_纯插件/plugins/bStats/
+/1.12.2_Spigot_纯插件/plugins/PlaceholderAPI/
+/1.12.2_Spigot_纯插件/plugins/PluginMetrics/
+/1.12.2_Spigot_纯插件/plugins/NeverLag/
+
+# AttributePlus specific ignores
 /1.12.2_Spigot_纯插件/plugins/AttributePlus/data.db
-1.12.2_Spigot_纯插件/plugins/AttributePlus/data.db
+
+/\[压缩包-公开版\]DragonCore-2.6.2.9

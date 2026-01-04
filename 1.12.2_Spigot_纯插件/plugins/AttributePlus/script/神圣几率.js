@@ -16,10 +16,15 @@ function onLoad(attr) {
 function runAttack(Attr, attacker, entity, handle) {
     // 计算神圣的几率
 	var chance = Attr.chance(Attr.getRandomValue(attacker, "神圣几率", handle) - Attr.getRandomValue(entity, "神圣躲避", handle));
-
+    // 触发神圣
 	if(chance) {
         // 有效伤害减免
         var real_reduction = (Attr.getRandomValue(entity, "伤害减免", handle) >= 80) ? 0.2 : (1 - Attr.getRandomValue(entity, "伤害减免", handle) / 100);
+        // 有效阶段防御
+        var stage_reduction = 1.0;
+        if (Utils.isType(entity, Arrays.asList(EntityType.PLAYER))) {
+            var stage_reduction = (Attr.getRandomValue(entity, "阶段防御", handle) > Attr.getRandomValue(attacker, "阶段攻击", handle)) ? 0.01 : 1.0;
+        }
         // 计算破甲效果值
         var pojiavalue = ((Attr.getRandomValue(attacker, "破甲效果", handle) - Attr.getRandomValue(entity, "破甲抵抗", handle)) / 100) > 0 ?
                         ((Attr.getRandomValue(attacker, "破甲效果", handle) - Attr.getRandomValue(entity, "破甲抵抗", handle)) / 100) : 0;
@@ -30,19 +35,38 @@ function runAttack(Attr, attacker, entity, handle) {
         var damage = ((Attr.getRandomValue(attacker, "神圣伤害", handle) - defense) > 0) ? (Attr.getRandomValue(attacker, "神圣伤害", handle) - defense) : 0;
         // 计算暴击率
 	    var crit_chance = Attr.chance(Attr.getRandomValue(attacker, "暴击几率", handle) - Attr.getRandomValue(entity, "暴击躲避", handle));
+        // 计算元素暴率率
+        var yuansu_crit_chance = Attr.chance(Attr.getRandomValue(attacker, "元素暴率", handle) - Attr.getRandomValue(entity, "元素躲暴", handle));
+        // 获取神圣觉醒
         var holy_effect = Attr.getRandomValue(attacker, "神圣觉醒", handle) / 100;
-        if (Utils.hasCooling("神圣冷却组", attacker, 4.0)) {
-            if (crit_chance) {
-                // 计算暴击倍率
-	            var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage > damage ?
-	            ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage : damage;
+        var is_yuansu_crit = false;
+        if (Utils.hasCooling("神圣冷却组", attacker, 15.0)) {
+            // 触发元素暴率
+            if (yuansu_crit_chance) {
+                is_yuansu_crit = true;
+            }
+            if (crit_chance || is_yuansu_crit) {
+                if (is_yuansu_crit) {
+                    // 元素暴率
+                    var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"元素暴伤",handle) - Attr.getRandomValue(entity,"元素暴抗",handle) ) / 100 * damage > damage ?
+                    ( 100 + Attr.getRandomValue(attacker,"元素暴伤",handle) - Attr.getRandomValue(entity,"元素暴抗",handle) ) / 100 * damage : damage;
+                } else {
+                    // 计算暴击倍率
+                    var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage > damage ?
+                    ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage : damage;
+                }
                 Attr.addDamage(attacker, crit_damage_value.toFixed(0), handle);
-                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction).toFixed(0) + "§a§l,并削弱了对方的防御");
-                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction).toFixed(0) + "§a§l,并被削弱了防御");
+                if (is_yuansu_crit) {
+                    attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§d§l元素暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction * stage_reduction).toFixed(0) + "§a§l,并削弱了对方的防御");
+                    entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§d§l元素暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction * stage_reduction).toFixed(0) + "§a§l,并被削弱了防御");
+                } else {
+                    attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction * stage_reduction).toFixed(0) + "§a§l,并削弱了对方的防御");
+                    entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction * stage_reduction).toFixed(0) + "§a§l,并被削弱了防御");
+                }
             } else {
                 Attr.addDamage(attacker, damage.toFixed(0), handle);
-                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0) + "§a§l,并削弱了对方的防御");
-                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0) + "§a§l,并被削弱了防御");
+                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction * stage_reduction).toFixed(0) + "§a§l,并削弱了对方的防御");
+                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction * stage_reduction).toFixed(0) + "§a§l,并被削弱了防御");
             }
             var data = Attr.getData(entity, handle)
             var data2 = Attr.getData(attacker, handle)
@@ -71,18 +95,33 @@ function runAttack(Attr, attacker, entity, handle) {
                 AttributeAPI.takeSourceAttribute(data, "神圣觉醒");
 		    })
         } else {
-            if (crit_chance) {
-                // 计算暴击倍率
-	            var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage > damage ?
-	            ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage : damage;
+            // 触发元素暴率
+            if (yuansu_crit_chance) {
+                is_yuansu_crit = true;
+            }
+            if (crit_chance || is_yuansu_crit) {
+                if (is_yuansu_crit) {
+                    // 元素暴率
+                    var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"元素暴伤",handle) - Attr.getRandomValue(entity,"元素暴抗",handle) ) / 100 * damage > damage ?
+                    ( 100 + Attr.getRandomValue(attacker,"元素暴伤",handle) - Attr.getRandomValue(entity,"元素暴抗",handle) ) / 100 * damage : damage;
+                } else {
+                    // 计算暴击倍率
+                    var crit_damage_value = ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage > damage ?
+                    ( 100 + Attr.getRandomValue(attacker,"暴击倍率",handle) - Attr.getRandomValue(entity,"暴击抵抗",handle) ) / 100 * damage : damage;
+                }
                 Attr.addDamage(attacker, crit_damage_value.toFixed(0), handle);
-                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction).toFixed(0));
-                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction).toFixed(0));
+                if (is_yuansu_crit) {
+                    attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§d§l元素暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction * stage_reduction).toFixed(0));
+                    entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§d§l元素暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction * stage_reduction).toFixed(0));
+                } else {
+                    attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction * stage_reduction).toFixed(0));
+                    entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§c§l暴击§r§a§l,伤害为§e§l" + (crit_damage_value * real_reduction * stage_reduction).toFixed(0));
+                }
             } else {
                 Attr.addDamage(attacker, damage.toFixed(0), handle);
-                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0));
-                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction).toFixed(0));
-        }
+                attacker.sendMessage("§7[§c战斗提示§7] §a§l你触发了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction * stage_reduction).toFixed(0));
+                entity.sendMessage("§7[§c战斗提示§7] §a§l你受到了一次§e§l神圣§r§a§l,伤害为§e§l" + (damage * real_reduction * stage_reduction).toFixed(0));
+            }
         }
 	}
     return chance
